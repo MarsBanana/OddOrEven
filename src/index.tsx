@@ -3,8 +3,16 @@ import ReactDOM from "react-dom"
 import App from "./App"
 import Framework7 from "framework7/framework7-lite.esm.bundle"
 import Framework7React from "framework7-react"
+import {Provider} from "react-redux"
+import {createStore} from "redux"
+import reducer from "./store/reducer"
 import "framework7/css/framework7.bundle.min.css"
 
 Framework7.use(Framework7React)
 
-ReactDOM.render(React.createElement(App), document.getElementById("root"))
+const store = createStore(reducer)
+
+ReactDOM.render(
+    <Provider store={store}>{React.createElement(App)}</Provider>,
+    document.getElementById("root")
+)
