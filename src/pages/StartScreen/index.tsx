@@ -1,4 +1,4 @@
-import {Block, Button, Row} from "framework7-react"
+import {Block, Button, Link, Row} from "framework7-react"
 import React from "react"
 import NameForm from "./NameForm"
 
@@ -13,8 +13,12 @@ const StartScreen: React.FC = () => {
         <>
             <Block>
                 <Row style={customRowStyle}>
-                    <Button>Join</Button>
-                    <Button>Create</Button>
+                    <Link href="/join/">
+                        <Button>Join</Button>
+                    </Link>
+                    <Link href="/create/">
+                        <Button>Create</Button>
+                    </Link>
                 </Row>
             </Block>
             <NameForm />
