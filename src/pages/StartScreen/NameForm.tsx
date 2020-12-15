@@ -12,9 +12,9 @@ const NameForm: React.FC = () => {
     const nameRef = useRef<any>(null)
 
     const handleConfirm = () => {
-        setIsNameFormOpen(false)
         const name = nameRef.current.__reactRefs.inputEl.value
         console.log(name)
+        setIsNameFormOpen(false)
     }
 
     return (
@@ -29,7 +29,7 @@ const NameForm: React.FC = () => {
                     clearButton
                 />
             </List>
-            <Button onClick={handleConfirm}>Confirm Name</Button>
+            <Button onClick={handleConfirm}>Confirm</Button>
         </Popup>
     )
 }
