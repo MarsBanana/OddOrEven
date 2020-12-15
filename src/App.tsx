@@ -1,4 +1,5 @@
 import {App, View} from "framework7-react"
+import React from "react"
 import StartScreen from "./pages/StartScreen"
 
 const f7params = {
@@ -6,7 +7,7 @@ const f7params = {
     id: "dater-test-game",
 }
 
-const AppComponent = () => (
+const AppComponent: React.FC = () => (
     <App params={f7params}>
         <View main>
             <StartScreen />
