@@ -10,7 +10,10 @@ import "framework7/css/framework7.bundle.min.css"
 
 Framework7.use(Framework7React)
 
-const store = createStore(reducer)
+const store = createStore(
+    reducer,
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 ReactDOM.render(
     <Provider store={store}>{React.createElement(App)}</Provider>,
