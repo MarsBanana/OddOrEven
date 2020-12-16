@@ -1,5 +1,5 @@
-import React, {useRef} from "react"
-import {Button, List, ListInput} from "framework7-react"
+import React, {CSSProperties, useRef} from "react"
+import {Button, List, ListInput, Block} from "framework7-react"
 import {useDispatch} from "react-redux"
 
 interface IFormTemplate {
@@ -9,6 +9,7 @@ interface IFormTemplate {
     label: string
     placeholder: string
     buttonName: string
+    style?: CSSProperties
 }
 
 const FormTemplate: React.FC<IFormTemplate> = ({
@@ -18,6 +19,7 @@ const FormTemplate: React.FC<IFormTemplate> = ({
     label,
     placeholder,
     buttonName,
+    style,
 }) => {
     const dispatch = useDispatch()
     const ref = useRef<any>(null)
@@ -31,7 +33,7 @@ const FormTemplate: React.FC<IFormTemplate> = ({
         }
     }
     return (
-        <>
+        <Block style={style}>
             <List inlineLabels>
                 <ListInput
                     ref={ref}
@@ -43,7 +45,7 @@ const FormTemplate: React.FC<IFormTemplate> = ({
                 />
             </List>
             <Button onClick={handleConfirm}>{buttonName}</Button>
-        </>
+        </Block>
     )
 }
 

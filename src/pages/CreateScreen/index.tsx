@@ -10,6 +10,11 @@ const CreateScreen: React.FC = () => {
                 label="Name your game"
                 placeholder="Name"
                 buttonName="Create"
+                style={{
+                    marginTop: "40vh",
+                    maxWidth: "40%",
+                    marginLeft: "30%",
+                }}
             />
         </Page>
     )
