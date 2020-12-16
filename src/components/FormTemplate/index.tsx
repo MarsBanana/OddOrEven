@@ -20,12 +20,16 @@ const FormTemplate: React.FC<IFormTemplate> = ({
     placeholder,
     buttonName,
     style,
+    children,
 }) => {
     const dispatch = useDispatch()
     const ref = useRef<any>(null)
     const handleConfirm = () => {
         const string = ref.current.__reactRefs.inputEl.value
         try {
+            if (!string) {
+                throw new Error("Empty string")
+            }
             dispatch(save(string))
             onSuccess()
         } catch {
@@ -44,6 +48,7 @@ const FormTemplate: React.FC<IFormTemplate> = ({
                     clearButton
                 />
             </List>
+            {children}
             <Button onClick={handleConfirm}>{buttonName}</Button>
         </Block>
     )
