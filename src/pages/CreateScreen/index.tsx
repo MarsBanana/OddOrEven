@@ -1,6 +1,18 @@
-import {View} from "framework7-react"
+import {Page} from "framework7-react"
 import React from "react"
+import FormTemplate from "../../components/FormTemplate"
 
-const CreateScreen: React.FC = () => <View url="/create/"></View>
+const CreateScreen: React.FC = () => {
+    return (
+        <Page>
+            <FormTemplate
+                save={() => {}}
+                label="Name your game"
+                placeholder="Name"
+                buttonName="Create"
+            />
+        </Page>
+    )
+}
 
 export default CreateScreen
