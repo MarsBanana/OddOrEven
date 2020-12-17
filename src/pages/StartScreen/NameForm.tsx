@@ -1,7 +1,7 @@
-import React, {useState} from "react"
-import {Popup} from "framework7-react"
+import React, {useState, useRef} from "react"
+import {Popup, List, ListInput, Button} from "framework7-react"
+import {useDispatch} from "react-redux"
 import {saveName} from "../../store/actions"
-import FormTemplate from "../../components/FormTemplate"
 
 const popupCustomStyle = {
     maxHeight: "180px",
@@ -10,16 +10,33 @@ const popupCustomStyle = {
 
 const NameForm: React.FC = () => {
     const [isNameFormOpen, setIsNameFormOpen] = useState<boolean>(true)
+    const dispatch = useDispatch()
+    const ref = useRef<any>(null)
+    const handleConfirm = () => {
+        const name = ref.current.__reactRefs.inputEl.value
+        try {
+            if (!name) {
+                throw new Error("Empty string")
+            }
+            dispatch(saveName(name))
+            setIsNameFormOpen(false)
+        } catch {
+            setIsNameFormOpen(true)
+        }
+    }
     return (
         <Popup closeByBackdropClick={false} opened={isNameFormOpen} style={popupCustomStyle}>
-            <FormTemplate
-                save={saveName}
-                onSuccess={() => setIsNameFormOpen(false)}
-                onFail={() => setIsNameFormOpen(true)}
-                label="Name"
-                placeholder="Your name"
-                buttonName="Confirm"
-            />
+            <List inlineLabels>
+                <ListInput
+                    ref={ref}
+                    type="text"
+                    label="Name"
+                    placeholder="Your name"
+                    autofocus
+                    clearButton
+                />
+            </List>
+            <Button onClick={handleConfirm}>Confirm</Button>
         </Popup>
     )
 }
