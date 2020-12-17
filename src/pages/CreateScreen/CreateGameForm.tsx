@@ -40,7 +40,6 @@ const CreateGameForm: React.FC = () => {
                     type="text"
                     label="Name your game"
                     placeholder="Name"
-                    autofocus
                     clearButton
                 />
                 <Block>

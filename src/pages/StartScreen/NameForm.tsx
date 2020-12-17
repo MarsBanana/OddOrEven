@@ -37,7 +37,6 @@ const NameForm: React.FC = () => {
                     label="Name"
                     placeholder="Your name"
                     autofocus
-                    clearButton
                 />
             </List>
             <Button onClick={handleConfirm}>Confirm</Button>
