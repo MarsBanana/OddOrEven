@@ -1,5 +1,5 @@
-import React, {useState, useRef} from "react"
-import {Button, List, ListInput, Popup} from "framework7-react"
+import React, {useState} from "react"
+import {Popup, List, ListInput, Button} from "framework7-react"
 import {useDispatch} from "react-redux"
 import {saveName} from "../../store/actions"
 
@@ -10,25 +10,29 @@ const popupCustomStyle = {
 
 const NameForm: React.FC = () => {
     const [isNameFormOpen, setIsNameFormOpen] = useState<boolean>(true)
+    const [name, setName] = useState<string>("")
     const dispatch = useDispatch()
 
-    const nameRef = useRef<any>(null)
-
     const handleConfirm = () => {
-        const name = nameRef.current.__reactRefs.inputEl.value
         try {
+            if (!name) {
+                throw new Error("Empty string")
+            }
+
             dispatch(saveName(name))
             setIsNameFormOpen(false)
         } catch {
             setIsNameFormOpen(true)
         }
     }
-
     return (
         <Popup closeByBackdropClick={false} opened={isNameFormOpen} style={popupCustomStyle}>
             <List inlineLabels>
                 <ListInput
-                    ref={nameRef}
+                    onChange={(e) => {
+                        setName(e.target.value)
+                    }}
+                    value={name}
                     type="text"
                     label="Name"
                     placeholder="Your name"
