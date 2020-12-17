@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react"
+import React, {useState} from "react"
 import {Popup, List, ListInput, Button} from "framework7-react"
 import {useDispatch} from "react-redux"
 import {saveName} from "../../store/actions"
