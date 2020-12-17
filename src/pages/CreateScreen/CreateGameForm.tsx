@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux"
 import {createGame} from "../../store/actions"
 
 const blockCustomStyle = {
-    marginTop: "40vh",
+    marginTop: "30vh",
     maxWidth: "40%",
     marginLeft: "30%",
 }
