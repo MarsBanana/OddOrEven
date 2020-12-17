@@ -1,5 +1,5 @@
 import {Block, List, ListInput, Button, Range, BlockTitle} from "framework7-react"
-import React, {useRef, useState} from "react"
+import React, {useState} from "react"
 import {useDispatch} from "react-redux"
 import {createGame} from "../../store/actions"
 
@@ -16,22 +16,27 @@ const blockTitleCustomStyle = {
 
 const CreateGameForm: React.FC = () => {
     const dispatch = useDispatch()
-    const [playersAmount, setPlayersAmount] = useState(2)
-    const nameRef = useRef<any>(null)
+    const [playersAmount, setPlayersAmount] = useState<number>(2)
+    const [gameName, setGameName] = useState<string>("")
+
     const handleConfirm = () => {
-        const name = nameRef.current.__reactRefs.inputEl.value
         try {
-            if (!name) {
+            if (!gameName) {
                 throw new Error("Empty string")
             }
-            dispatch(createGame(name, playersAmount))
+
+            dispatch(createGame(gameName, playersAmount))
         } catch {}
     }
+
     return (
         <Block style={blockCustomStyle}>
             <List inlineLabels>
                 <ListInput
-                    ref={nameRef}
+                    onChange={(e) => {
+                        setGameName(e.target.value)
+                    }}
+                    value={gameName}
                     type="text"
                     label="Name your game"
                     placeholder="Name"

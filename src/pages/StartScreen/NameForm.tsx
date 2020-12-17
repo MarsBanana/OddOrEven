@@ -10,14 +10,15 @@ const popupCustomStyle = {
 
 const NameForm: React.FC = () => {
     const [isNameFormOpen, setIsNameFormOpen] = useState<boolean>(true)
+    const [name, setName] = useState<string>("")
     const dispatch = useDispatch()
-    const ref = useRef<any>(null)
+
     const handleConfirm = () => {
-        const name = ref.current.__reactRefs.inputEl.value
         try {
             if (!name) {
                 throw new Error("Empty string")
             }
+
             dispatch(saveName(name))
             setIsNameFormOpen(false)
         } catch {
@@ -28,7 +29,10 @@ const NameForm: React.FC = () => {
         <Popup closeByBackdropClick={false} opened={isNameFormOpen} style={popupCustomStyle}>
             <List inlineLabels>
                 <ListInput
-                    ref={ref}
+                    onChange={(e) => {
+                        setName(e.target.value)
+                    }}
+                    value={name}
                     type="text"
                     label="Name"
                     placeholder="Your name"
