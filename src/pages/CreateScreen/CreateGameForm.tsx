@@ -1,5 +1,5 @@
 import {Block, List, ListInput, Button, Range, BlockTitle} from "framework7-react"
-import React, {useRef} from "react"
+import React, {useRef, useState} from "react"
 import {useDispatch} from "react-redux"
 import {createGame} from "../../store/actions"
 
@@ -16,17 +16,15 @@ const blockTitleCustomStyle = {
 
 const CreateGameForm: React.FC = () => {
     const dispatch = useDispatch()
+    const [playersAmount, setPlayersAmount] = useState(2)
     const nameRef = useRef<any>(null)
-    const amountRef = useRef<any>(null)
     const handleConfirm = () => {
         const name = nameRef.current.__reactRefs.inputEl.value
-        const amount = amountRef.current
-        console.log(amount)
         try {
             if (!name) {
                 throw new Error("Empty string")
             }
-            dispatch(createGame(name))
+            dispatch(createGame(name, playersAmount))
         } catch {}
     }
     return (
@@ -43,14 +41,14 @@ const CreateGameForm: React.FC = () => {
                 <Block>
                     <BlockTitle style={blockTitleCustomStyle}>Amount of players</BlockTitle>
                     <Range
-                        ref={amountRef}
-                        min={1}
+                        onRangeChange={setPlayersAmount}
+                        min={2}
                         max={10}
                         label={true}
                         step={1}
-                        value={1}
+                        value={playersAmount}
                         scale={true}
-                        scaleSteps={9}
+                        scaleSteps={8}
                     />
                 </Block>
             </List>

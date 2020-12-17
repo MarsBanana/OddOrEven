@@ -5,7 +5,10 @@ export const saveName = (name: string): ActionTypes => ({
     payload: name
 })
 
-export const createGame = (gameName: string): ActionTypes => ({
+export const createGame = (gameName: string, playersAmount: number): ActionTypes => ({
     type: actionTypes.CREATE_GAME,
-    payload: gameName
+    payload: {
+        gameName,
+        playersAmount
+    }
 })

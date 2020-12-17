@@ -6,6 +6,7 @@ export enum actionTypes {
 export interface IState {
     name: string | null
     gameName: string | null
+    playersAmount: number | null
 }
 
 interface SaveNameAction {
@@ -15,7 +16,10 @@ interface SaveNameAction {
 
 interface CreateGameAction {
     type: typeof actionTypes.CREATE_GAME
-    payload: string
+    payload: {
+        gameName: string
+        playersAmount: number
+    }
 }
 
 export type ActionTypes = SaveNameAction | CreateGameAction
