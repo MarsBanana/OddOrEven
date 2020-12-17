@@ -10,17 +10,17 @@ const popupCustomStyle = {
 }
 
 const NameForm: React.FC = () => {
-    const [isNameFormOpen, setIsNameFormOpen] = useState<boolean>(true)
+    const [isNameFormOpen, setIsNameFormOpen] = useState<boolean>(false)
     const [name, setName] = useState<string>("")
     const dispatch = useDispatch()
 
     const storedName = useSelector((state: IState) => state.name)
 
     useEffect(() => {
-        if (storedName !== null) {
-            setIsNameFormOpen(false)
+        if (storedName === null) {
+            setIsNameFormOpen(true)
         }
-    }, [])
+    })
 
     const handleConfirm = () => {
         try {
