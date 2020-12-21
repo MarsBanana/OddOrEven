@@ -1,10 +1,9 @@
-import {call,put,takeLatest} from "redux-saga/effects"
+import {takeLatest} from "redux-saga/effects"
 import { ActionTypes,actionTypes } from "./types";
-import {createGameSuccess} from "./actions"
 
 function *createGame(action:ActionTypes) {
     try {
-        yield console.log(action.payload)//put(createGameSuccess(action.payload.gameName,action.payload.playersAmount))
+        yield console.log(action.payload)
     } catch (e) {
         yield console.log(e)
     }

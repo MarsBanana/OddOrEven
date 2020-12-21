@@ -12,11 +12,3 @@ export const createGame = (gameName: string, playersAmount: number): ActionTypes
         playersAmount
     }
 })
-
-export const createGameSuccess = (gameName: string, playersAmount: number): ActionTypes => ({
-    type: actionTypes.CREATE_GAME_SUCCESS,
-    payload: {
-        gameName,
-        playersAmount
-    }
-})
