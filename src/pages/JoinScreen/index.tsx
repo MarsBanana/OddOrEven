@@ -5,8 +5,11 @@ import {fetchGamesList} from "../../store/actions"
 
 const JoinScreen: React.FC = () => {
     const dispatch = useDispatch()
-    useEffect(() => {
+    const fetch = () => {
         dispatch(fetchGamesList())
+    }
+    useEffect(() => {
+        fetch()
     })
     return <Page></Page>
 }

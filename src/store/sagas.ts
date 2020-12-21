@@ -12,7 +12,7 @@ function *createGame(action:CreateGameAction) {
 
 function *fetchGamesList() {
     try {
-        yield api.fetchGamesList()
+        yield api.fetchGamesList((gamesList) => {console.log(gamesList)})
     } catch (e) {
         yield console.log(e)
     }

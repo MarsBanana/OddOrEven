@@ -2,12 +2,17 @@ import firebase from "../firebase"
 
 const db = firebase.firestore()
 
-const fetchGamesList = () => {
+const fetchGamesList = (callback: (any:any[]) => void) => {
     db.collection("games").get()
-        .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                console.log(`${doc.id} => ${doc.data()}`)
+        .then((snapshot) => {
+            let gamesList: any[] = []
+            snapshot.forEach((doc) => {
+                gamesList.push({
+                    data: doc.data(),
+                    id: doc.id
+                })
             })
+            return callback(gamesList)
         })
 }
 
