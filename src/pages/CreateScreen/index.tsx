@@ -1,4 +1,4 @@
-import {Page, Link} from "framework7-react"
+import {Page, Link, f7} from "framework7-react"
 import React from "react"
 import CreateGameForm from "./CreateGameForm"
 
@@ -10,7 +10,7 @@ const CreateScreen: React.FC = () => {
     return (
         <Page>
             <CreateGameForm />
-            <Link style={customLinkStyle} href="/">
+            <Link style={customLinkStyle} onClick={() => f7.views.main.router.back()}>
                 GO BACK
             </Link>
         </Page>
