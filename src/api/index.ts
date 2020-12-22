@@ -1,10 +1,11 @@
 import firebase from "../firebase"
 import {CREATE_GAME_PARAMS} from "./types"
+import {collections} from "./constants"
 
 const db = firebase.firestore()
 
 const createGame = (params: CREATE_GAME_PARAMS) => {
-    db.collection("games").add({
+    db.collection(collections.GAMES_LIST).add({
         ...params,
         isStarted: false
     })
