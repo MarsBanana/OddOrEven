@@ -1,6 +1,6 @@
 export enum actionTypes {
     SAVE_NAME = "SAVE_NAME",
-    CREATE_GAME = "CREATE_GAME"
+    CREATE_GAME = "CREATE_GAME",
 }
 
 export interface IState {
