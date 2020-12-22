@@ -1,7 +1,8 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import {Popup, List, ListInput, Button} from "framework7-react"
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {saveName} from "../../store/actions"
+import {IState} from "../../store/types"
 
 const popupCustomStyle = {
     maxHeight: "180px",
@@ -9,9 +10,17 @@ const popupCustomStyle = {
 }
 
 const NameForm: React.FC = () => {
-    const [isNameFormOpen, setIsNameFormOpen] = useState<boolean>(true)
+    const [isNameFormOpen, setIsNameFormOpen] = useState<boolean>(false)
     const [name, setName] = useState<string>("")
     const dispatch = useDispatch()
+
+    const storedName = useSelector((state: IState) => state.name)
+
+    useEffect(() => {
+        if (storedName === null) {
+            setIsNameFormOpen(true)
+        }
+    })
 
     const handleConfirm = () => {
         try {
@@ -37,7 +46,6 @@ const NameForm: React.FC = () => {
                     label="Name"
                     placeholder="Your name"
                     autofocus
-                    clearButton
                 />
             </List>
             <Button onClick={handleConfirm}>Confirm</Button>

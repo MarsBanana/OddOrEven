@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux"
 import {createGame} from "../../store/actions"
 
 const blockCustomStyle = {
-    marginTop: "40vh",
+    marginTop: "30vh",
     maxWidth: "40%",
     marginLeft: "30%",
 }
@@ -40,8 +40,6 @@ const CreateGameForm: React.FC = () => {
                     type="text"
                     label="Name your game"
                     placeholder="Name"
-                    autofocus
-                    clearButton
                 />
                 <Block>
                     <BlockTitle style={blockTitleCustomStyle}>Amount of players</BlockTitle>
