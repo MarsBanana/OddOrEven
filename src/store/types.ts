@@ -3,6 +3,7 @@ import {CREATE_GAME_PARAMS} from "../api/types"
 export enum actionTypes {
     SAVE_NAME = "SAVE_NAME",
     CREATE_GAME = "CREATE_GAME",
+    FETCH_GAMES_LIST = "FETCH_GAMES_LIST"
 }
 
 export interface IState {
@@ -21,4 +22,8 @@ export interface CreateGameAction {
     payload: CREATE_GAME_PARAMS
 }
 
-export type ActionTypes = SaveNameAction | CreateGameAction
+export interface FetchGamesListAction {
+    type: typeof actionTypes.FETCH_GAMES_LIST
+}
+
+export type ActionTypes = SaveNameAction | CreateGameAction | FetchGamesListAction

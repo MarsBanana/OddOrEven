@@ -12,3 +12,7 @@ export const createGame = (gameName: string, playersAmount: number): ActionTypes
         playersAmount
     }
 })
+
+export const fetchGamesList = (): ActionTypes => ({
+    type: actionTypes.FETCH_GAMES_LIST
+})
