@@ -1,3 +1,5 @@
+import {CREATE_GAME_PARAMS} from "../api/types"
+
 export enum actionTypes {
     SAVE_NAME = "SAVE_NAME",
     CREATE_GAME = "CREATE_GAME",
@@ -9,17 +11,14 @@ export interface IState {
     playersAmount: number | null
 }
 
-interface SaveNameAction {
+export interface SaveNameAction {
     type: typeof actionTypes.SAVE_NAME
     payload: string
 }
 
-interface CreateGameAction {
+export interface CreateGameAction {
     type: typeof actionTypes.CREATE_GAME
-    payload: {
-        gameName: string
-        playersAmount: number
-    }
+    payload: CREATE_GAME_PARAMS
 }
 
 export type ActionTypes = SaveNameAction | CreateGameAction

@@ -1,13 +1,14 @@
 import {takeLatest} from "redux-saga/effects"
-import { ActionTypes,actionTypes } from "./types";
+import { CreateGameAction,actionTypes } from "./types"
+import api from "../api"
 
 function *sagas() {
     yield takeLatest(actionTypes.CREATE_GAME,createGame)
 }
 
-function *createGame(action:ActionTypes) {
+function *createGame(action:CreateGameAction) {
     try {
-        yield console.log(action.payload)
+        yield api.createGame(action.payload)
     } catch (e) {
         yield console.log(e)
     }
