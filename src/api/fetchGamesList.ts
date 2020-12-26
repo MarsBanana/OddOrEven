@@ -13,11 +13,11 @@ const fetchGamesList = () => {
                 const data = doc.data()
                 gamesList.push({id: doc.id, data: (data as GameData)})
             })
-            return gamesList
         })
         .catch((err) => {
             console.log(err)
         })
+    return gamesList
 }
 
 export default fetchGamesList
