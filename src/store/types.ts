@@ -3,13 +3,26 @@ import {CREATE_GAME_PARAMS} from "../api/types"
 export enum actionTypes {
     SAVE_NAME = "SAVE_NAME",
     CREATE_GAME = "CREATE_GAME",
-    FETCH_GAMES_LIST = "FETCH_GAMES_LIST"
+    FETCH_GAMES_LIST = "FETCH_GAMES_LIST",
+    ADD_GAMES_LIST = "ADD_GAMES_LIST"
+}
+
+export type GameData = {
+    gameName: string
+    playersAmount: number
+    isStarted: boolean
+}
+
+export type Game = {
+    id: string
+    data: GameData
 }
 
 export interface IState {
     name: string | null
     gameName: string | null
     playersAmount: number | null
+    gamesList: Array<Game>
 }
 
 export interface SaveNameAction {
@@ -26,4 +39,9 @@ export interface FetchGamesListAction {
     type: typeof actionTypes.FETCH_GAMES_LIST
 }
 
-export type ActionTypes = SaveNameAction | CreateGameAction | FetchGamesListAction
+export interface AddGamesList {
+    type: typeof actionTypes.ADD_GAMES_LIST,
+    payload: Array<Game>
+}
+
+export type ActionTypes = SaveNameAction | CreateGameAction | FetchGamesListAction | AddGamesList

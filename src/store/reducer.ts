@@ -3,7 +3,8 @@ import {IState, actionTypes, ActionTypes} from "./types"
 const initialState: IState = {
     name: null,
     gameName: null,
-    playersAmount: null
+    playersAmount: null,
+    gamesList: []
 }
 
 const reducer = (state = initialState, action: ActionTypes): IState => {
@@ -18,6 +19,11 @@ const reducer = (state = initialState, action: ActionTypes): IState => {
                 ...state,
                 gameName: action.payload.gameName,
                 playersAmount: action.payload.playersAmount
+            }
+        case actionTypes.ADD_GAMES_LIST:
+            return {
+                ...state,
+                gamesList: action.payload
             }
         default:
             return state
