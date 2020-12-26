@@ -3,6 +3,7 @@ import GoBack from "../../components/GoBack"
 import React, {useEffect} from "react"
 import {useDispatch} from "react-redux"
 import {fetchGamesList} from "../../store/actions"
+import GamesList from "./GamesList"
 
 const customBlockStyle = {
     marginTop: "20vh",
@@ -18,6 +19,7 @@ const JoinScreen: React.FC = () => {
         <Page>
             <Block style={customBlockStyle}>
                 <Button onClick={fetch}>Update</Button>
+                <GamesList />
                 <GoBack />
             </Block>
         </Page>
