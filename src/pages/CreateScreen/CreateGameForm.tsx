@@ -1,4 +1,4 @@
-import {Block, List, ListInput, Button, Range, BlockTitle} from "framework7-react"
+import {Block, List, ListInput, Button, Range, BlockTitle, f7} from "framework7-react"
 import React, {useState} from "react"
 import {useDispatch} from "react-redux"
 import {createGame} from "../../store/actions"
@@ -26,6 +26,7 @@ const CreateGameForm: React.FC = () => {
             }
 
             dispatch(createGame(gameName, playersAmount))
+            f7.views.main.router.navigate("/game/")
         } catch {}
     }
 
