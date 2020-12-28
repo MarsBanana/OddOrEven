@@ -1,6 +1,6 @@
 import {Block, Button, Page} from "framework7-react"
 import GoBack from "../../components/GoBack"
-import React, {useEffect, useCallback} from "react"
+import React, {useEffect} from "react"
 import {useDispatch} from "react-redux"
 import {fetchGamesList} from "../../store/actions"
 import GamesList from "./GamesList"
@@ -11,7 +11,7 @@ const customBlockStyle = {
 
 const JoinScreen: React.FC = () => {
     const dispatch = useDispatch()
-    const fetch = useCallback(() => dispatch(fetchGamesList()), [dispatch])
+    const fetch = () => dispatch(fetchGamesList())
     useEffect(() => {
         fetch()
     })
