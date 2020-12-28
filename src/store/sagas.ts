@@ -1,4 +1,4 @@
-import {takeLatest, put} from "redux-saga/effects"
+import {takeLatest, put,call} from "redux-saga/effects"
 import {CreateGameAction, actionTypes} from "./types"
 import api from "../api"
 import {addGamesList} from "./actions"
@@ -18,7 +18,7 @@ function* createGame(action: CreateGameAction) {
 
 function* fetchGamesList() {
     try {
-        const gamesList = yield api.fetchGamesList()
+        const gamesList = yield call(api.fetchGamesList)
         yield put(addGamesList(gamesList))
     } catch (e) {
         yield console.log(e)
