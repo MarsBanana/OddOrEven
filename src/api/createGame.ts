@@ -8,7 +8,9 @@ const createGame = (params: CREATE_GAME_PARAMS) => {
     let docId
     db.collection(collections.GAMES_LIST).add({
         ...params,
-        isStarted: false
+        isStarted: false,
+        players: [],
+        movesDone: 0
     })
         .then((docRef) => {docId = docRef})
         .catch((err) => {console.log(err)})
