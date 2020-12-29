@@ -5,7 +5,8 @@ const initialState: IState = {
     gameName: null,
     playersAmount: null,
     gamesList: [],
-    currentId: null
+    currentId: null,
+    currentGame: null
 }
 
 const reducer = (state = initialState, action: ActionTypes): IState => {
@@ -30,6 +31,11 @@ const reducer = (state = initialState, action: ActionTypes): IState => {
             return {
                 ...state,
                 currentId: action.payload
+            }
+        case actionTypes.UPDATE_GAME_STATE:
+            return {
+                ...state,
+                currentGame: action.payload
             }
         default:
             return state

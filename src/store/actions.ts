@@ -1,4 +1,4 @@
-import {actionTypes,ActionTypes, Game} from "./types"
+import {actionTypes,ActionTypes, Game, GameData} from "./types"
 
 export const saveName = (name: string): ActionTypes => ({
     type: actionTypes.SAVE_NAME,
@@ -25,4 +25,9 @@ export const addGamesList = (games: Array<Game>): ActionTypes => ({
 export const saveCurrentId = (id: string): ActionTypes => ({
     type: actionTypes.SAVE_CURRENT_ID,
     payload: id
+})
+
+export const updateGameState = (game: GameData): ActionTypes => ({
+    type: actionTypes.UPDATE_GAME_STATE,
+    payload: game
 })
