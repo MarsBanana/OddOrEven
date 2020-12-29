@@ -19,8 +19,8 @@ const JoinScreen: React.FC = () => {
     return (
         <Page>
             <Block style={customBlockStyle}>
-                <GamesList />
                 <GoBack />
+                <GamesList />
             </Block>
         </Page>
     )

@@ -6,8 +6,8 @@ import CreateGameForm from "./CreateGameForm"
 const CreateScreen: React.FC = () => {
     return (
         <Page>
-            <CreateGameForm />
             <GoBack />
+            <CreateGameForm />
         </Page>
     )
 }
