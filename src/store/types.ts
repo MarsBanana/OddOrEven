@@ -13,6 +13,15 @@ export type GameData = {
     gameName: string
     playersAmount: number
     isStarted: boolean
+    players: Array<Player>
+    movesDone: number
+}
+
+export type Player = {
+    name: string
+    number?: number
+    guess?: boolean
+    points: number
 }
 
 export type Game = {
