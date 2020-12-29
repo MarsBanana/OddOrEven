@@ -6,9 +6,11 @@ import {Game, IState} from "../../store/types"
 const GamesList: React.FC = () => {
     const gamesList = useSelector<IState, Array<Game>>((state) => state.gamesList)
     const [list, setList] = useState<Array<Game>>(gamesList)
+
     useEffect(() => {
         gamesList.length && setList(gamesList)
     }, [gamesList])
+
     return (
         <List>
             {list.map((game: Game) => (

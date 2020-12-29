@@ -7,7 +7,7 @@ const db = firebase.firestore()
 const fetchGamesList = () => {
     let gamesList: Array<Game> = []
     db.collection(collections.GAMES_LIST)
-        .get()
+        .get({source:"server"})
         .then((snapshot) => {
             snapshot.forEach((doc) => {
                 const data = doc.data()

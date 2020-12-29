@@ -11,9 +11,11 @@ const customBlockStyle = {
 
 const JoinScreen: React.FC = () => {
     const dispatch = useDispatch()
+
     useEffect(() => {
         dispatch(fetchGamesList())
     })
+
     return (
         <Page>
             <Block style={customBlockStyle}>
