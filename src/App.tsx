@@ -3,6 +3,7 @@ import React from "react"
 import StartScreen from "./pages/StartScreen"
 import CreateScreen from "./pages/CreateScreen"
 import GameScreen from "./pages/GameScreen"
+import JoinScreen from "./pages/JoinScreen"
 
 const f7params = {
     name: "Odd or Even",
@@ -15,6 +16,10 @@ const f7params = {
         {
             path: "/create/",
             component: CreateScreen,
+        },
+        {
+            path: "/join/",
+            component: JoinScreen,
         },
         {
             path: "/game/",
