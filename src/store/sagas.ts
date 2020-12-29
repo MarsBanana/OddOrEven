@@ -1,7 +1,7 @@
 import {takeLatest, put,call} from "redux-saga/effects"
 import {CreateGameAction, actionTypes} from "./types"
 import api from "../api"
-import {addGamesList} from "./actions"
+import {addGamesList, saveCurrentId} from "./actions"
 
 function* sagas() {
     yield takeLatest(actionTypes.CREATE_GAME, createGame)
@@ -10,7 +10,8 @@ function* sagas() {
 
 function* createGame(action: CreateGameAction) {
     try {
-        yield api.createGame(action.payload)
+        const id = yield api.createGame(action.payload)
+        yield put(saveCurrentId(id))
     } catch (e) {
         yield console.log(e)
     }

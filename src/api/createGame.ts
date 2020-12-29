@@ -5,12 +5,14 @@ import {collections} from "./constants"
 const db = firebase.firestore()
 
 const createGame = (params: CREATE_GAME_PARAMS) => {
+    let docId
     db.collection(collections.GAMES_LIST).add({
         ...params,
         isStarted: false
     })
-        .then((docRef) => {console.log(docRef)})
+        .then((docRef) => {docId = docRef})
         .catch((err) => {console.log(err)})
+    return docId
 }
 
 export default createGame

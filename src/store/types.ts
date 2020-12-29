@@ -4,7 +4,8 @@ export enum actionTypes {
     SAVE_NAME = "SAVE_NAME",
     CREATE_GAME = "CREATE_GAME",
     FETCH_GAMES_LIST = "FETCH_GAMES_LIST",
-    ADD_GAMES_LIST = "ADD_GAMES_LIST"
+    ADD_GAMES_LIST = "ADD_GAMES_LIST",
+    SAVE_CURRENT_ID = "SAVE_CURRENT_ID"
 }
 
 export type GameData = {
@@ -23,6 +24,7 @@ export interface IState {
     gameName: string | null
     playersAmount: number | null
     gamesList: Array<Game>
+    currentId: string | null
 }
 
 export interface SaveNameAction {
@@ -44,4 +46,9 @@ export interface AddGamesList {
     payload: Array<Game>
 }
 
-export type ActionTypes = SaveNameAction | CreateGameAction | FetchGamesListAction | AddGamesList
+export interface SaveCurrentId {
+    type: typeof actionTypes.SAVE_CURRENT_ID
+    payload: string
+}
+
+export type ActionTypes = SaveNameAction | CreateGameAction | FetchGamesListAction | AddGamesList | SaveCurrentId

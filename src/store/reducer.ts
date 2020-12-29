@@ -4,7 +4,8 @@ const initialState: IState = {
     name: null,
     gameName: null,
     playersAmount: null,
-    gamesList: []
+    gamesList: [],
+    currentId: null
 }
 
 const reducer = (state = initialState, action: ActionTypes): IState => {
@@ -24,6 +25,11 @@ const reducer = (state = initialState, action: ActionTypes): IState => {
             return {
                 ...state,
                 gamesList: action.payload
+            }
+        case actionTypes.SAVE_CURRENT_ID:
+            return {
+                ...state,
+                currentId: action.payload
             }
         default:
             return state
