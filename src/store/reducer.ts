@@ -28,6 +28,11 @@ const reducer = (state = initialState, action: ActionTypes): IState => {
                 ...state,
                 currentGame: action.payload
             }
+        case actionTypes.SAVE_DISCONNECT:
+            return {
+                ...state,
+                disconnect: action.payload
+            }
         default:
             return state
     }

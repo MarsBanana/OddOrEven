@@ -6,7 +6,10 @@ export enum actionTypes {
     FETCH_GAMES_LIST = "FETCH_GAMES_LIST",
     ADD_GAMES_LIST = "ADD_GAMES_LIST",
     SAVE_CURRENT_ID = "SAVE_CURRENT_ID",
-    UPDATE_GAME_STATE = "UPDATE_GAME_STATE"
+    UPDATE_GAME_STATE = "UPDATE_GAME_STATE",
+    ENTER_GAME = "ENTER_GAME",
+    QUIT_GAME = "QUIT_GAME",
+    SAVE_DISCONNECT = "SAVE_DICONNECT"
 }
 
 export type GameData = {
@@ -34,6 +37,7 @@ export interface IState {
     gamesList: Array<Game>
     currentId?: string
     currentGame: GameData | null
+    disconnect?: () => void
 }
 
 export interface SaveNameAction {
@@ -65,10 +69,37 @@ export interface UpdateGameStateAction {
     payload: GameData | null
 }
 
+export interface EnterGameAction {
+    type: typeof actionTypes.ENTER_GAME
+    payload: {
+        id: string
+        name: string
+        game: GameData | null
+    }
+}
+
+export interface QuitGameAction {
+    type: typeof actionTypes.QUIT_GAME
+    payload: {
+        id: string
+        name: string
+        game: GameData | null,
+        disconnect?: () => void
+    }
+}
+
+export interface SaveDisconnectAction {
+    type: typeof actionTypes.SAVE_DISCONNECT
+    payload?: () => void
+}
+
 export type ActionTypes = 
     SaveNameAction |
     CreateGameAction |
     FetchGamesListAction |
     AddGamesListAction |
     SaveCurrentIdAction |
-    UpdateGameStateAction
+    UpdateGameStateAction |
+    EnterGameAction |
+    QuitGameAction |
+    SaveDisconnectAction

@@ -31,3 +31,27 @@ export const updateGameState = (game: GameData | null): ActionTypes => ({
     type: actionTypes.UPDATE_GAME_STATE,
     payload: game
 })
+
+export const enterGame = (name: string, id: string, game: GameData | null): ActionTypes => ({
+    type: actionTypes.ENTER_GAME,
+    payload: {
+        name,
+        id,
+        game
+    }
+})
+
+export const quitGame = (name: string, id: string, game: GameData | null, disconnect?: () => void): ActionTypes => ({
+    type: actionTypes.QUIT_GAME,
+    payload: {
+        name,
+        id,
+        game,
+        disconnect
+    }
+})
+
+export const saveDisconnect = (disconnect?: () => void): ActionTypes => ({
+    type: actionTypes.SAVE_DISCONNECT,
+    payload: disconnect
+})
