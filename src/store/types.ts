@@ -31,8 +31,6 @@ export type Game = {
 
 export interface IState {
     name: string | null
-    gameName: string | null
-    playersAmount: number | null
     gamesList: Array<Game>
     currentId?: string
     currentGame: GameData | null
