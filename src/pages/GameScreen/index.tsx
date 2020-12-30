@@ -1,5 +1,5 @@
-import {Block, BlockTitle, Page, Preloader} from "framework7-react"
-import React, {useEffect} from "react"
+import {Block, BlockTitle, List, ListItem, Page, Preloader} from "framework7-react"
+import React, {CSSProperties, useEffect} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import api from "../../api"
 import {updateGameState} from "../../store/actions"
@@ -11,6 +11,7 @@ const customBlockStyle = {
     marginLeft: "15%",
     display: "flex",
     justifyContent: "center",
+    flexDirection: "column",
 }
 
 const GameScreen: React.FC = () => {
@@ -31,13 +32,25 @@ const GameScreen: React.FC = () => {
 
     return (
         <Page>
-            <Block style={customBlockStyle}>
+            <Block style={customBlockStyle as CSSProperties}>
                 {!data ? (
-                    <Preloader />
+                    <Preloader size={48} />
                 ) : (
-                    <BlockTitle style={{maxWidth: "136.1px"}} medium>
-                        {data.gameName}
-                    </BlockTitle>
+                    <>
+                        <BlockTitle style={{textAlign: "center"}} medium>
+                            {data.gameName}
+                        </BlockTitle>
+                        {!data.isStarted && (
+                            <BlockTitle style={{textAlign: "center"}}>
+                                Wait for {data.playersAmount - data.players.length} more players
+                            </BlockTitle>
+                        )}
+                        <List>
+                            {data.players.map((player) => (
+                                <ListItem>{player.name}</ListItem>
+                            ))}
+                        </List>
+                    </>
                 )}
             </Block>
         </Page>
