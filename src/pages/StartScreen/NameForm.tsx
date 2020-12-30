@@ -20,7 +20,7 @@ const NameForm: React.FC = () => {
         if (storedName === null) {
             setIsNameFormOpen(true)
         }
-    })
+    }, [])
 
     const handleConfirm = () => {
         try {

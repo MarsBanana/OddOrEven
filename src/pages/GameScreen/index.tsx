@@ -2,6 +2,7 @@ import {Block, BlockTitle, List, ListItem, Page, Preloader} from "framework7-rea
 import React, {CSSProperties, useEffect} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import api from "../../api"
+import GoBack from "../../components/GoBack"
 import {updateGameState} from "../../store/actions"
 import {IState, GameData} from "../../store/types"
 
@@ -27,14 +28,18 @@ const GameScreen: React.FC = () => {
         const disconnect = api.connectToGame({id, update})
         return () => {
             disconnect()
+            dispatch(updateGameState(null))
         }
-    })
+    }, [])
 
     return (
         <Page>
             <Block style={customBlockStyle as CSSProperties}>
+                <GoBack />
                 {!data ? (
-                    <Preloader size={48} />
+                    <div style={{maxWidth: "32px", marginLeft: "calc(50% - 16px)"}}>
+                        <Preloader />
+                    </div>
                 ) : (
                     <>
                         <BlockTitle style={{textAlign: "center"}} medium>

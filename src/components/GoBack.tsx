@@ -5,8 +5,8 @@ const customLinkStyle = {
     marginLeft: "calc(50% - 32px)",
 }
 
-const GoBack: React.FC = () => (
-    <Link style={customLinkStyle} onClick={() => f7.views.main.router.back()}>
+const GoBack: React.FC<{center?: boolean}> = ({center}) => (
+    <Link style={center ? customLinkStyle : {}} onClick={() => f7.views.main.router.back()}>
         GO BACK
     </Link>
 )

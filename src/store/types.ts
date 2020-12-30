@@ -64,7 +64,7 @@ export interface SaveCurrentIdAction {
 
 export interface UpdateGameStateAction {
     type: typeof actionTypes.UPDATE_GAME_STATE
-    payload: GameData
+    payload: GameData | null
 }
 
 export type ActionTypes = 

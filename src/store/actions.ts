@@ -27,7 +27,7 @@ export const saveCurrentId = (id: string): ActionTypes => ({
     payload: id
 })
 
-export const updateGameState = (game: GameData): ActionTypes => ({
+export const updateGameState = (game: GameData | null): ActionTypes => ({
     type: actionTypes.UPDATE_GAME_STATE,
     payload: game
 })

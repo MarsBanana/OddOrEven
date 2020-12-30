@@ -7,7 +7,7 @@ const CreateScreen: React.FC = () => {
     return (
         <Page>
             <Block style={{marginTop: "30vh"}}>
-                <GoBack />
+                <GoBack center />
                 <CreateGameForm />
             </Block>
         </Page>

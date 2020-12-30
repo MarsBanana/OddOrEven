@@ -14,12 +14,12 @@ const JoinScreen: React.FC = () => {
 
     useEffect(() => {
         dispatch(fetchGamesList())
-    })
+    }, [])
 
     return (
         <Page>
             <Block style={customBlockStyle}>
-                <GoBack />
+                <GoBack center />
                 <GamesList />
             </Block>
         </Page>
