@@ -1,8 +1,11 @@
 import {Block, BlockTitle, List, ListItem, Page, Preloader} from "framework7-react"
 import React, {CSSProperties, useEffect} from "react"
 import {useDispatch, useSelector} from "react-redux"
+import api from "../../api"
+import playerJoin from "../../api/playerJoin"
+import playerLeave from "../../api/playerLeave"
 import GoBack from "../../components/GoBack"
-import {enterGame, quitGame} from "../../store/actions"
+import {saveCurrentId, updateGameState} from "../../store/actions"
 import {IState, GameData} from "../../store/types"
 
 const customBlockStyle = {
@@ -17,15 +20,22 @@ const customBlockStyle = {
 const GameScreen: React.FC = () => {
     const dispatch = useDispatch()
     const id = useSelector<IState, string | undefined>((state) => state.currentId)
-    const game = useSelector<IState, GameData | null>((state) => state.currentGame)
+    const data = useSelector<IState, GameData | null>((state) => state.currentGame)
     const name = useSelector<IState, string | null>((state) => state.name)
-    const disconnect = useSelector<IState, (() => void) | undefined>((state) => state.disconnect)
+
+    const update = (game: GameData | null) => {
+        dispatch(updateGameState(game))
+    }
 
     useEffect(() => {
         if (id && name) {
-            dispatch(enterGame(name, id, game))
+            const disconnect = api.connectToGame({id, update})
+            data && playerJoin({name, id, players: data.players})
             return () => {
-                dispatch(quitGame(name, id, game, disconnect))
+                disconnect()
+                update(null)
+                data && playerLeave({name, id, players: data.players})
+                dispatch(saveCurrentId())
             }
         }
     }, [id])
@@ -34,22 +44,22 @@ const GameScreen: React.FC = () => {
         <Page>
             <Block style={customBlockStyle as CSSProperties}>
                 <GoBack />
-                {!game ? (
+                {!data ? (
                     <div style={{maxWidth: "32px", marginLeft: "calc(50% - 16px)"}}>
                         <Preloader />
                     </div>
                 ) : (
                     <>
                         <BlockTitle style={{textAlign: "center"}} medium>
-                            {game.gameName}
+                            {data.gameName}
                         </BlockTitle>
-                        {!game.isStarted && (
+                        {!data.isStarted && (
                             <BlockTitle style={{textAlign: "center"}}>
-                                Wait for {game.playersAmount - game.players.length} more players
+                                Wait for {data.playersAmount - data.players.length} more players
                             </BlockTitle>
                         )}
                         <List>
-                            {game.players.map((player) => (
+                            {data.players.map((player) => (
                                 <ListItem>{player.name}</ListItem>
                             ))}
                         </List>
