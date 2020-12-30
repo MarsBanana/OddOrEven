@@ -20,14 +20,17 @@ const GamesList: React.FC = () => {
 
     return (
         <List>
-            {list.map((game: Game) => (
-                <ListItem
-                    key={game.id}
-                    title={game.data.gameName}
-                    after={`${game.data.players.length}/${game.data.playersAmount}`}
-                    onClick={() => !game.data.isStarted && connectToGame(game.id)}
-                />
-            ))}
+            {list.map(
+                (game: Game) =>
+                    !game.data.isStarted && (
+                        <ListItem
+                            key={game.id}
+                            title={game.data.gameName}
+                            after={`${game.data.players.length}/${game.data.playersAmount}`}
+                            onClick={() => connectToGame(game.id)}
+                        />
+                    )
+            )}
         </List>
     )
 }
