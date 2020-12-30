@@ -22,7 +22,7 @@ export const addGamesList = (games: Array<Game>): ActionTypes => ({
     payload: games
 })
 
-export const saveCurrentId = (id: string): ActionTypes => ({
+export const saveCurrentId = (id?: string): ActionTypes => ({
     type: actionTypes.SAVE_CURRENT_ID,
     payload: id
 })

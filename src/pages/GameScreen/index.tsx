@@ -3,7 +3,7 @@ import React, {CSSProperties, useEffect} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import api from "../../api"
 import GoBack from "../../components/GoBack"
-import {updateGameState} from "../../store/actions"
+import {saveCurrentId, updateGameState} from "../../store/actions"
 import {IState, GameData} from "../../store/types"
 
 const customBlockStyle = {
@@ -25,12 +25,15 @@ const GameScreen: React.FC = () => {
     }
 
     useEffect(() => {
-        const disconnect = api.connectToGame({id, update})
-        return () => {
-            disconnect()
-            dispatch(updateGameState(null))
+        if (id) {
+            const disconnect = api.connectToGame({id, update})
+            return () => {
+                disconnect()
+                dispatch(updateGameState(null))
+                dispatch(saveCurrentId())
+            }
         }
-    }, [])
+    }, [id])
 
     return (
         <Page>

@@ -59,7 +59,7 @@ export interface AddGamesListAction {
 
 export interface SaveCurrentIdAction {
     type: typeof actionTypes.SAVE_CURRENT_ID
-    payload: string
+    payload?: string
 }
 
 export interface UpdateGameStateAction {
