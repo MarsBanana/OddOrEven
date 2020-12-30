@@ -1,4 +1,4 @@
-import {Block, BlockTitle, Page} from "framework7-react"
+import {Block, BlockTitle, Page, Preloader} from "framework7-react"
 import React, {useEffect} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import api from "../../api"
@@ -15,20 +15,27 @@ const customBlockStyle = {
 
 const GameScreen: React.FC = () => {
     const dispatch = useDispatch()
+    const id = useSelector<IState, string | undefined>((state) => state.currentId)
     const data = useSelector<IState, GameData | null>((state) => state.currentGame)
 
     const update = (game: GameData) => {
         dispatch(updateGameState(game))
     }
 
-    useEffect(() => {})
+    useEffect(() => {
+        api.connectToGame({id, update})
+    })
 
     return (
         <Page>
             <Block style={customBlockStyle}>
-                <BlockTitle style={{maxWidth: "136.1px"}} medium>
-                    Game Name
-                </BlockTitle>
+                {!data ? (
+                    <Preloader />
+                ) : (
+                    <BlockTitle style={{maxWidth: "136.1px"}} medium>
+                        {data.gameName}
+                    </BlockTitle>
+                )}
             </Block>
         </Page>
     )

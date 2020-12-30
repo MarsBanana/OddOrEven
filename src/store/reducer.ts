@@ -5,7 +5,6 @@ const initialState: IState = {
     gameName: null,
     playersAmount: null,
     gamesList: [],
-    currentId: null,
     currentGame: null
 }
 

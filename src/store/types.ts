@@ -34,7 +34,7 @@ export interface IState {
     gameName: string | null
     playersAmount: number | null
     gamesList: Array<Game>
-    currentId: string | null
+    currentId?: string
     currentGame: GameData | null
 }
 

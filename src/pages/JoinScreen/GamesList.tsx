@@ -24,7 +24,7 @@ const GamesList: React.FC = () => {
                 <ListItem
                     key={game.id}
                     title={game.data.gameName}
-                    after={game.data.playersAmount}
+                    after={`Players: ${game.data.players.length}/${game.data.playersAmount}`}
                     onClick={() => connectToGame(game.id)}
                 />
             ))}
