@@ -10,13 +10,14 @@ interface IConnectToGame {
 }
 
 const connectToGame = ({id, update}: IConnectToGame) => {
-    db.collection(collections.GAMES_LIST).doc(id)
+    const disconnect = db.collection(collections.GAMES_LIST).doc(id)
         .onSnapshot(
             (doc) => {
                 const data = doc.data()
                 data && update(data as GameData)
             }
         )
+    return disconnect
 }
 
 export default  connectToGame

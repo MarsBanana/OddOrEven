@@ -23,7 +23,10 @@ const GameScreen: React.FC = () => {
     }
 
     useEffect(() => {
-        api.connectToGame({id, update})
+        const disconnect = api.connectToGame({id, update})
+        return () => {
+            disconnect()
+        }
     })
 
     return (
