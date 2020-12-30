@@ -5,7 +5,7 @@ import {collections} from "./constants"
 const db = firebase.firestore()
 
 interface IConnectToGame {
-    id?: string,
+    id: string,
     update: (game: GameData) => void
 }
 
