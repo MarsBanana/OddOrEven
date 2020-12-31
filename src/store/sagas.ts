@@ -1,17 +1,21 @@
+import {channel} from "redux-saga"
 import * as Effects from "redux-saga/effects"
 import {CreateGameAction, actionTypes, SaveCurrentIdAction, GameData} from "./types"
 import api from "../api"
 import {addGamesList, saveCurrentId, updateGameState, saveDisconnect} from "./actions"
 
 const call: any = Effects.call
-const {takeLatest, all, put, select} = Effects
+const {takeLatest, all, put, select, take} = Effects
+
+const updateGameChannel = channel()
 
 function* sagas() {
     yield all([
         takeLatest(actionTypes.CREATE_GAME, createGame),
         takeLatest(actionTypes.FETCH_GAMES_LIST, fetchGamesList),
         takeLatest(actionTypes.SAVE_CURRENT_ID, onIdChange),
-        takeLatest(actionTypes.QUIT_GAME, quitGame)
+        takeLatest(actionTypes.QUIT_GAME, quitGame),
+        watchUpdateGameChannel()
     ])
 }
 
@@ -41,7 +45,7 @@ function* onIdChange(action: SaveCurrentIdAction) {
             const disconnect = yield call(api.connectToGame, {
                 id,
                 update: (game: GameData | null) => {
-                    put(updateGameState(game))
+                    updateGameChannel.put(updateGameState(game))
                 },
             })
             yield put(saveDisconnect(disconnect))
@@ -61,6 +65,13 @@ function* onIdChange(action: SaveCurrentIdAction) {
         yield console.log(e)
     }
 }
+
+export function* watchUpdateGameChannel() {
+    while (true) {
+      const action = yield take(updateGameChannel)
+      yield put(action)
+    }
+  }
 
 function* quitGame() {
     try {
