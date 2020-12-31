@@ -2,7 +2,6 @@ import * as Effects from "redux-saga/effects"
 import {CreateGameAction, actionTypes, SaveCurrentIdAction, GameData} from "./types"
 import api from "../api"
 import {addGamesList, saveCurrentId, updateGameState, saveDisconnect} from "./actions"
-import { useDispatch } from "react-redux"
 
 const call: any = Effects.call
 const {takeLatest, all, put, select} = Effects
