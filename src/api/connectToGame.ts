@@ -15,6 +15,7 @@ const connectToGame = ({id, update}: IConnectToGame) => {
             (doc) => {
                 const data = doc.data()
                 data && update(data as GameData)
+                console.log("CONNECT")
             }
         )
     return disconnect

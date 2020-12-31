@@ -1,12 +1,9 @@
 import {Block, BlockTitle, List, ListItem, Page, Preloader} from "framework7-react"
 import React, {CSSProperties, useEffect} from "react"
 import {useDispatch, useSelector} from "react-redux"
-import api from "../../api"
-import playerJoin from "../../api/playerJoin"
-import playerLeave from "../../api/playerLeave"
 import GoBack from "../../components/GoBack"
-import {saveCurrentId, updateGameState} from "../../store/actions"
 import {IState, GameData} from "../../store/types"
+import {quitGame} from "../../store/actions"
 
 const customBlockStyle = {
     marginTop: "20vh",
@@ -19,26 +16,14 @@ const customBlockStyle = {
 
 const GameScreen: React.FC = () => {
     const dispatch = useDispatch()
-    const id = useSelector<IState, string | undefined>((state) => state.currentId)
-    const data = useSelector<IState, GameData | null>((state) => state.currentGame)
-    const name = useSelector<IState, string | null>((state) => state.name)
 
-    const update = (game: GameData | null) => {
-        dispatch(updateGameState(game))
-    }
+    const data = useSelector<IState, GameData | null>((state) => state.currentGame)
 
     useEffect(() => {
-        if (id && name) {
-            const disconnect = api.connectToGame({id, update})
-            data && playerJoin({name, id, players: data.players})
-            return () => {
-                disconnect()
-                update(null)
-                data && playerLeave({name, id, players: data.players})
-                dispatch(saveCurrentId())
-            }
+        return () => {
+            dispatch(quitGame())
         }
-    }, [id])
+    }, [])
 
     return (
         <Page>
@@ -59,8 +44,8 @@ const GameScreen: React.FC = () => {
                             </BlockTitle>
                         )}
                         <List>
-                            {data.players.map((player) => (
-                                <ListItem>{player.name}</ListItem>
+                            {data.players.map((player, idx) => (
+                                <ListItem key={player.name + idx}>{player.name}</ListItem>
                             ))}
                         </List>
                     </>
