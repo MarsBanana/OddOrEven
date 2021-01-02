@@ -1,8 +1,8 @@
 import {channel} from "redux-saga"
 import * as Effects from "redux-saga/effects"
-import {CreateGameAction, actionTypes, SaveCurrentIdAction, GameData} from "./types"
+import {CreateGameAction, actionTypes} from "./types"
 import api from "../api"
-import {addGamesList, saveCurrentId, updateGameState, saveDisconnect} from "./actions"
+import {addGamesList, saveCurrentId, updateGameState} from "./actions"
 
 const call: any = Effects.call
 const {takeLatest, all, put, select, take} = Effects
@@ -13,9 +13,9 @@ function* sagas() {
     yield all([
         takeLatest(actionTypes.CREATE_GAME, createGame),
         takeLatest(actionTypes.FETCH_GAMES_LIST, fetchGamesList),
-        takeLatest(actionTypes.SAVE_CURRENT_ID, onIdChange),
+        takeLatest(actionTypes.ENTER_GAME, enterGame),
         takeLatest(actionTypes.QUIT_GAME, quitGame),
-        watchUpdateGameChannel()
+        watchUpdateGameChannel(),
     ])
 }
 
@@ -37,41 +37,25 @@ function* fetchGamesList() {
     }
 }
 
-function* onIdChange(action: SaveCurrentIdAction) {
-    try {
-        const id = action.payload
-
-        if (id) {
-            const disconnect = yield call(api.connectToGame, {
-                id,
-                update: (game: GameData | null) => {
-                    updateGameChannel.put(updateGameState(game))
-                },
-            })
-            yield put(saveDisconnect(disconnect))
-            
-            const name = yield select((state) => state.name)
-            const players = yield select((state) => state.currentGame.players)
-            yield call(api.playerJoin,{name,id,players})
-
-        } else {
-            const disconnect = yield select((state) => state.disconnect)
-            yield call(disconnect)
-            yield put(saveDisconnect())
-
-            yield put(updateGameState(null))
-        }
-    } catch (e) {
-        yield console.log(e)
-    }
-}
-
 export function* watchUpdateGameChannel() {
     while (true) {
       const action = yield take(updateGameChannel)
       yield put(action)
     }
   }
+
+export function* enterGame() {
+    try {
+        const name = yield select((state) => state.name)
+        const players = yield select((state) => state.currentGame.players)
+        const id = yield select((state) => state.currentId)
+
+        yield call(api.playerJoin,{name,id,players})
+
+    } catch (e) {
+        console.log(e)
+    }
+}
 
 function* quitGame() {
     try {
@@ -82,7 +66,7 @@ function* quitGame() {
         yield call(api.playerLeave, {name, id, players})
 
         yield put(saveCurrentId())
-
+        yield put(updateGameState(null))
     } catch (e) {
         console.log(e)
     }

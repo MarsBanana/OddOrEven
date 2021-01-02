@@ -16,7 +16,6 @@ const playerLeave = ({name, id, players}: IPlayerLeave) => {
     db.collection(collections.GAMES_LIST).doc(id).update({
         players:newPlayers
     })
-        .then(() => console.log("leave"))
         .catch((e) => {console.log(e)})
     return {}
 }

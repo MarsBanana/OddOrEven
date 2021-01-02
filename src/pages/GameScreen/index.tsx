@@ -1,9 +1,10 @@
 import {Block, BlockTitle, List, ListItem, Page, Preloader} from "framework7-react"
-import React, {CSSProperties, useEffect} from "react"
+import React, {CSSProperties, useEffect, useRef, useState} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import GoBack from "../../components/GoBack"
 import {IState, GameData} from "../../store/types"
-import {quitGame} from "../../store/actions"
+import {enterGame, quitGame, updateGameState} from "../../store/actions"
+import api from "../../api"
 
 const customBlockStyle = {
     marginTop: "20vh",
@@ -17,11 +18,32 @@ const customBlockStyle = {
 const GameScreen: React.FC = () => {
     const dispatch = useDispatch()
 
+    const [isGameEntered, setIsGameEntered] = useState<boolean>(false)
+
     const data = useSelector<IState, GameData | null>((state) => state.currentGame)
+    const id = useSelector<IState, string | undefined>((state) => state.currentId)
+
+    useEffect(() => {
+        if (data && !isGameEntered) {
+            dispatch(enterGame())
+            setIsGameEntered(true)
+        }
+    }, [data])
+
+    const disconnect = useRef<() => void>()
+
+    useEffect(() => {
+        if (id) {
+            disconnect.current = api.connectToGame({
+                id,
+                update: (game: GameData) => dispatch(updateGameState(game)),
+            })
+        }
+    }, [id])
 
     useEffect(() => {
         return () => {
-            dispatch(quitGame())
+            disconnect.current && dispatch(quitGame(disconnect.current))
         }
     }, [])
 
