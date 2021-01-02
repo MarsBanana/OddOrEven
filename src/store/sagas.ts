@@ -1,6 +1,6 @@
 import {channel} from "redux-saga"
 import * as Effects from "redux-saga/effects"
-import {CreateGameAction, actionTypes} from "./types"
+import {CreateGameAction, actionTypes, QuitGameAction} from "./types"
 import api from "../api"
 import {addGamesList, saveCurrentId, updateGameState} from "./actions"
 
@@ -57,13 +57,15 @@ export function* enterGame() {
     }
 }
 
-function* quitGame() {
+function* quitGame(action: QuitGameAction) {
     try {
         const id = yield select((state) => state.currentId)
         const name = yield select((state) => state.name)
         const players = yield select((state) => state.currentGame.players)
 
         yield call(api.playerLeave, {name, id, players})
+
+        yield call(action.payload)
 
         yield put(saveCurrentId())
         yield put(updateGameState(null))

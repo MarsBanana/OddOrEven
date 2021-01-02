@@ -1,10 +1,10 @@
 import {Block, BlockTitle, List, ListItem, Page, Preloader} from "framework7-react"
 import React, {CSSProperties, useEffect, useRef, useState} from "react"
 import {useDispatch, useSelector} from "react-redux"
-import GoBack from "../../components/GoBack"
 import {IState, GameData} from "../../store/types"
 import {enterGame, quitGame, updateGameState} from "../../store/actions"
 import api from "../../api"
+import GoBack from "../../components/GoBack"
 
 const customBlockStyle = {
     marginTop: "20vh",
@@ -50,7 +50,7 @@ const GameScreen: React.FC = () => {
     return (
         <Page>
             <Block style={customBlockStyle as CSSProperties}>
-                <GoBack />
+                <GoBack>QUIT</GoBack>
                 {!data ? (
                     <div style={{maxWidth: "32px", marginLeft: "calc(50% - 16px)"}}>
                         <Preloader />
@@ -67,7 +67,11 @@ const GameScreen: React.FC = () => {
                         )}
                         <List>
                             {data.players.map((player, idx) => (
-                                <ListItem key={player.name + idx}>{player.name}</ListItem>
+                                <ListItem
+                                    key={player.name + idx}
+                                    after={`${player.points}`}
+                                    title={player.name}
+                                />
                             ))}
                         </List>
                     </>

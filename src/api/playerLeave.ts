@@ -14,7 +14,7 @@ const playerLeave = ({name, id, players}: IPlayerLeave) => {
     const index = players.findIndex((player) => player.name === name)
     const newPlayers = [...players.slice(0,index), ...players.slice(index+1,-1)]
     db.collection(collections.GAMES_LIST).doc(id).update({
-        players:newPlayers
+        players: newPlayers
     })
         .catch((e) => {console.log(e)})
     return {}
