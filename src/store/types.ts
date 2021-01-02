@@ -11,18 +11,38 @@ export enum actionTypes {
     ENTER_GAME = "ENTER_GAME"
 }
 
+export enum guessTypes {
+    ODD = "ODD",
+    EVEN = "EVEN"
+}
+
+export type TGuess = typeof guessTypes.ODD | typeof guessTypes.EVEN
+
+export enum phaseTypes {
+    GUESS = "GUESS",
+    PICK = "PICK"
+}
+
+export type TPhase = typeof phaseTypes.GUESS | typeof phaseTypes.PICK
+
+export type MoveData = {
+    playerName: string
+    number?: number
+    guess?: TGuess
+    phase: TPhase
+}
+
 export type GameData = {
     gameName: string
     playersAmount: number
     isStarted: boolean
     players: Array<Player>
-    movesDone: number
+    roundsLeft: number
+    currentMove?: MoveData
 }
 
 export type Player = {
     name: string
-    number?: number
-    guess?: boolean
     points: number
 }
 
