@@ -41,9 +41,15 @@ const GameScreen: React.FC = () => {
         }
     }, [id])
 
+    const quit = () => {
+        disconnect.current && dispatch(quitGame(disconnect.current))
+    }
+
     useEffect(() => {
+        window.onbeforeunload = quit
         return () => {
-            disconnect.current && dispatch(quitGame(disconnect.current))
+            quit()
+            window.onbeforeunload = null
         }
     }, [])
 
