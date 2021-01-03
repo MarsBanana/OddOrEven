@@ -3,7 +3,7 @@ import {IState, actionTypes, ActionTypes} from "./types"
 const initialState: IState = {
     name: null,
     gamesList: [],
-    currentGame: null
+    currentGame: null,
 }
 
 const reducer = (state = initialState, action: ActionTypes): IState => {
