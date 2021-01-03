@@ -1,4 +1,4 @@
-import {Block, List, ListItem, Page, Preloader} from "framework7-react"
+import {Block, Page} from "framework7-react"
 import React, {CSSProperties, useEffect, useRef, useState} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import {IState, GameData} from "../../store/types"
