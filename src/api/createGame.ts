@@ -9,7 +9,7 @@ const createGame = (params: CREATE_GAME_PARAMS) => {
 
     const id = remoteConfig
         .fetchAndActivate()
-        .then(() => remoteConfig.getString(configConstants.ROUNDS))
+        .then(() => remoteConfig.getNumber(configConstants.ROUNDS))
         .then((roundsLeft) =>
             db
                 .collection(collections.GAMES_LIST)

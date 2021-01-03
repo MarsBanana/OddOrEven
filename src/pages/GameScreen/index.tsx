@@ -49,7 +49,10 @@ const GameScreen: React.FC = () => {
     }
 
     useEffect(() => {
-        window.onbeforeunload = quit
+        window.onbeforeunload = () => {
+            quit()
+            return null
+        }
         return () => {
             quit()
             window.onbeforeunload = null
