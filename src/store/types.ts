@@ -11,13 +11,6 @@ export enum actionTypes {
     ENTER_GAME = "ENTER_GAME"
 }
 
-export enum guessTypes {
-    ODD = "ODD",
-    EVEN = "EVEN"
-}
-
-export type TGuess = typeof guessTypes.ODD | typeof guessTypes.EVEN
-
 export enum phaseTypes {
     GUESS = "GUESS",
     PICK = "PICK"
@@ -26,10 +19,10 @@ export enum phaseTypes {
 export type TPhase = typeof phaseTypes.GUESS | typeof phaseTypes.PICK
 
 export type MoveData = {
-    playerName: string
-    number?: number
-    guess?: TGuess
+    index: number
+    name: string
     phase: TPhase
+    number?: number
 }
 
 export type GameData = {

@@ -1,10 +1,12 @@
-import {Block, BlockTitle, List, ListItem, Page, Preloader} from "framework7-react"
+import {Block, List, ListItem, Page, Preloader} from "framework7-react"
 import React, {CSSProperties, useEffect, useRef, useState} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import {IState, GameData} from "../../store/types"
 import {enterGame, quitGame, updateGameState} from "../../store/actions"
 import api from "../../api"
 import GoBack from "../../components/GoBack"
+import GameInfo from "./GameInfo"
+import Loader from "../../components/Loader"
 
 const customBlockStyle = {
     marginTop: "20vh",
@@ -56,36 +58,8 @@ const GameScreen: React.FC = () => {
     return (
         <Page>
             <Block style={customBlockStyle as CSSProperties}>
-                <GoBack>QUIT</GoBack>
-                {!data ? (
-                    <div style={{maxWidth: "32px", marginLeft: "calc(50% - 16px)"}}>
-                        <Preloader />
-                    </div>
-                ) : (
-                    <>
-                        <BlockTitle style={{textAlign: "center"}} medium>
-                            {data.gameName}
-                        </BlockTitle>
-                        {!data.isStarted ? (
-                            <BlockTitle style={{textAlign: "center"}}>
-                                Wait for {data.playersAmount - data.players.length} more players
-                            </BlockTitle>
-                        ) : (
-                            <BlockTitle style={{textAlign: "center"}}>
-                                {data.roundsLeft} rounds left
-                            </BlockTitle>
-                        )}
-                        <List>
-                            {data.players.map((player, idx) => (
-                                <ListItem
-                                    key={player.name + idx}
-                                    after={`${player.points}`}
-                                    title={player.name}
-                                />
-                            ))}
-                        </List>
-                    </>
-                )}
+                <GoBack />
+                {!data ? <Loader /> : <GameInfo data={data} />}
             </Block>
         </Page>
     )
