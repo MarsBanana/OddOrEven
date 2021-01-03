@@ -49,8 +49,9 @@ export function* enterGame() {
         const name = yield select((state) => state.name)
         const players = yield select((state) => state.currentGame.players)
         const id = yield select((state) => state.currentId)
+        const playersAmount = yield select((state) => state.currentGame.playersAmount)
 
-        yield call(api.playerJoin,{name,id,players})
+        yield call(api.playerJoin,{name,id,players,playersAmount})
 
     } catch (e) {
         console.log(e)

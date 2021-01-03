@@ -11,7 +11,9 @@ const GameInfo: React.FC<{data: GameData}> = ({data}) => (
                 text={`Wait for ${data.playersAmount - data.players.length} more players`}
             />
         ) : (
-            <CenteredText text={`${data.roundsLeft} rounds left`} />
+            <CenteredText
+                text={data.roundsLeft !== 1 ? `${data.roundsLeft} rounds left` : `Final round`}
+            />
         )}
         <List>
             {data.players.map((player, idx) => (

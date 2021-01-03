@@ -24,6 +24,7 @@ const GameScreen: React.FC = () => {
 
     const data = useSelector<IState, GameData | null>((state) => state.currentGame)
     const id = useSelector<IState, string | undefined>((state) => state.currentId)
+    const name = useSelector<IState, string | null>((state) => state.name)
 
     useEffect(() => {
         if (data && !isGameEntered) {
@@ -58,7 +59,8 @@ const GameScreen: React.FC = () => {
     return (
         <Page>
             <Block style={customBlockStyle as CSSProperties}>
-                <GoBack />
+                {!data?.isStarted && <GoBack />}
+                {data?.isStarted && data.currentMove?.name === name ? <div></div> : <div></div>}
                 {!data ? <Loader /> : <GameInfo data={data} />}
             </Block>
         </Page>
