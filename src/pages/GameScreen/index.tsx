@@ -66,9 +66,13 @@ const GameScreen: React.FC = () => {
                         <BlockTitle style={{textAlign: "center"}} medium>
                             {data.gameName}
                         </BlockTitle>
-                        {!data.isStarted && (
+                        {!data.isStarted ? (
                             <BlockTitle style={{textAlign: "center"}}>
                                 Wait for {data.playersAmount - data.players.length} more players
+                            </BlockTitle>
+                        ) : (
+                            <BlockTitle style={{textAlign: "center"}}>
+                                {data.roundsLeft} rounds left
                             </BlockTitle>
                         )}
                         <List>
