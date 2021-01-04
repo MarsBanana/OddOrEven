@@ -17,7 +17,10 @@ const guess = ({players, gameId, currentMove, points, roundsLeft}: IGuess) => {
 
     const pointsArr = players.map((player) => player.points)
     const maxPoints = Math.max(...pointsArr)
-    const maxPointsArr = pointsArr.map((points) => points === maxPoints)
+    let maxPointsArr: Array<number> = []
+    pointsArr.forEach((points) => {
+        if (points === maxPoints) maxPointsArr.push(points)
+    })
 
     const endGame =
         currentMove.index === players.length - 1 && roundsLeft === 1 && maxPointsArr.length === 1
@@ -27,12 +30,17 @@ const guess = ({players, gameId, currentMove, points, roundsLeft}: IGuess) => {
         phase: phaseTypes.PICK,
     }
 
-    const newData = {
-        currentMove: !endGame ? newMove : undefined,
-        players,
-        winner: endGame ? players.find((player) => player.points === maxPoints) : undefined
-    }
-
+    const newData = endGame
+        ? {
+              currentMove: null,
+              players,
+              winner: players.find((player) => player.points === maxPoints),
+          }
+        : {
+              currentMove: newMove,
+              players,
+          }
+    console.log(endGame,roundsLeft)
     db.collection(collections.GAMES_LIST).doc(gameId).update(newData)
 }
 

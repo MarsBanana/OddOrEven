@@ -105,7 +105,7 @@ function* onGuess(action: GuessAction) {
             gameId,
             currentMove: data.currentMove,
             points: action.payload,
-            roundsLeft: data.currentGame.roundLeft
+            roundsLeft: data.roundsLeft
         })
 
     } catch (e) {

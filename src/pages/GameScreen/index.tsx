@@ -8,6 +8,7 @@ import GoBack from "../../components/GoBack"
 import GameInfo from "./GameInfo"
 import Loader from "../../components/Loader"
 import Move from "./Move"
+import Winner from "./Winner"
 
 const customBlockStyle = {
     marginTop: "20vh",
@@ -66,6 +67,7 @@ const GameScreen: React.FC = () => {
                 {!data?.isStarted && <GoBack />}
                 {!data ? <Loader /> : <GameInfo data={data} />}
                 {data && name && <Move data={data} name={name} />}
+                {data && <Winner />}
             </Block>
         </Page>
     )
