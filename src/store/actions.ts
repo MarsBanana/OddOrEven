@@ -40,3 +40,13 @@ export const quitGame = (disconnect: () => void): ActionTypes => ({
 export const enterGame = (): ActionTypes => ({
     type: actionTypes.ENTER_GAME
 })
+
+export const pickNumber = (number: number): ActionTypes => ({
+    type: actionTypes.PICK_NUMBER,
+    payload: number
+})
+
+export const guess = (points: number): ActionTypes => ({
+    type: actionTypes.GUESS,
+    payload: points
+})

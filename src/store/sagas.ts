@@ -1,6 +1,6 @@
 import {channel} from "redux-saga"
 import * as Effects from "redux-saga/effects"
-import {CreateGameAction, actionTypes, QuitGameAction} from "./types"
+import {CreateGameAction, actionTypes, QuitGameAction, PickNumberAction, GuessAction} from "./types"
 import api from "../api"
 import {addGamesList, saveCurrentId, updateGameState} from "./actions"
 
@@ -15,6 +15,8 @@ function* sagas() {
         takeLatest(actionTypes.FETCH_GAMES_LIST, fetchGamesList),
         takeLatest(actionTypes.ENTER_GAME, enterGame),
         takeLatest(actionTypes.QUIT_GAME, quitGame),
+        takeLatest(actionTypes.PICK_NUMBER, onPick),
+        takeLatest(actionTypes.GUESS, onGuess),
         watchUpdateGameChannel(),
     ])
 }
@@ -70,6 +72,41 @@ function* quitGame(action: QuitGameAction) {
 
         yield put(saveCurrentId())
         yield put(updateGameState(null))
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+function* onPick(action: PickNumberAction) {
+    try {
+        const data = yield select((state) => state.currentGame)
+        const gameId = yield select((state) => state.currentId)
+
+        yield call(api.pickNumber,{
+            number: action.payload,
+            players: data.players,
+            gameId,
+            currentMove: data.currentMove,
+            roundsLeft: data.roundsLeft
+        })
+
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+function* onGuess(action: GuessAction) {
+    try {
+        const data = yield select((state) => state.currentGame)
+        const gameId = yield select((state) => state.currentId)
+
+        yield call(api.guess,{
+            players: data.players,
+            gameId,
+            currentMove: data.currentMove,
+            points: action.payload
+        })
+
     } catch (e) {
         console.log(e)
     }

@@ -8,7 +8,9 @@ export enum actionTypes {
     SAVE_CURRENT_ID = "SAVE_CURRENT_ID",
     UPDATE_GAME_STATE = "UPDATE_GAME_STATE",
     QUIT_GAME = "QUIT_GAME",
-    ENTER_GAME = "ENTER_GAME"
+    ENTER_GAME = "ENTER_GAME",
+    PICK_NUMBER = "PICK_NUMBER",
+    GUESS = "GUESS"
 }
 
 export enum phaseTypes {
@@ -90,6 +92,16 @@ export interface EnterGameAction {
     type: typeof actionTypes.ENTER_GAME
 }
 
+export interface PickNumberAction {
+    type: typeof actionTypes.PICK_NUMBER
+    payload: number
+}
+
+export interface GuessAction {
+    type: typeof actionTypes.GUESS
+    payload: number
+}
+
 export type ActionTypes = 
     SaveNameAction |
     CreateGameAction |
@@ -98,4 +110,6 @@ export type ActionTypes =
     SaveCurrentIdAction |
     UpdateGameStateAction |
     QuitGameAction |
-    EnterGameAction
+    EnterGameAction |
+    PickNumberAction |
+    GuessAction
