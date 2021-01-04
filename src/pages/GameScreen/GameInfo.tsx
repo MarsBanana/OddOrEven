@@ -1,7 +1,7 @@
 import React from "react"
 import CenteredText from "../../components/CenteredText"
 import {List, ListItem} from "framework7-react"
-import {GameData} from "../../store/types"
+import {GameData, phaseTypes} from "../../store/types"
 
 const GameInfo: React.FC<{data: GameData}> = ({data}) => (
     <>
@@ -11,9 +11,16 @@ const GameInfo: React.FC<{data: GameData}> = ({data}) => (
                 text={`Wait for ${data.playersAmount - data.players.length} more players`}
             />
         ) : (
-            <CenteredText
-                text={data.roundsLeft !== 1 ? `${data.roundsLeft} rounds left` : `Final round`}
-            />
+            <>
+                <CenteredText
+                    text={`${data.currentMove?.name} is ${
+                        data.currentMove?.phase === phaseTypes.GUESS ? "guessing" : "picking"
+                    }`}
+                />
+                <CenteredText
+                    text={data.roundsLeft !== 1 ? `${data.roundsLeft} rounds left` : `Final round`}
+                />
+            </>
         )}
         <List>
             {data.players.map((player, idx) => (
