@@ -34,6 +34,7 @@ export type GameData = {
     players: Array<Player>
     roundsLeft: number
     currentMove?: MoveData
+    winner?: Player
 }
 
 export type Player = {
