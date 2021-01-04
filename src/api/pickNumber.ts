@@ -25,7 +25,7 @@ const pickNumber = ({number, players, gameId, currentMove, roundsLeft}: IPickNum
             phase: phaseTypes.GUESS,
             number
         },
-        roundsLeft: newRoundsLeft
+        roundsLeft: newRoundsLeft > 0 ? newRoundsLeft : 1
     }
 
     db.collection(collections.GAMES_LIST).doc(gameId).update(newData)
