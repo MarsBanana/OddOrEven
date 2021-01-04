@@ -65,7 +65,7 @@ const GameScreen: React.FC = () => {
             <Block style={customBlockStyle as CSSProperties}>
                 {!data?.isStarted && <GoBack />}
                 {!data ? <Loader /> : <GameInfo data={data} />}
-                {data?.isStarted && data.currentMove?.name === name && <Move data={data} />}
+                {data && name && <Move data={data} name={name} />}
             </Block>
         </Page>
     )

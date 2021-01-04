@@ -14,7 +14,7 @@ interface IPickNumber {
 
 const pickNumber = ({number, players, gameId, currentMove, roundsLeft}: IPickNumber) => {
 
-    const newIndex = currentMove.index === players.length ? 0 : currentMove.index + 1
+    const newIndex = currentMove.index + 1 === players.length ? 0 : currentMove.index + 1
 
     const newRoundsLeft = newIndex === 0 ? roundsLeft - 1 : roundsLeft
 
