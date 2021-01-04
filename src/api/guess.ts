@@ -4,14 +4,14 @@ import { collections } from "./constants"
 
 const db = firebase.firestore()
 
-interface IPickNumber {
+interface IGuess {
     players: Array<Player>
     gameId: string
     currentMove: MoveData
     points: number
 }
 
-const pickNumber = ({players, gameId, currentMove, points}: IPickNumber) => {
+const guess = ({players, gameId, currentMove, points}: IGuess) => {
 
     players[currentMove.index].points += points
 
@@ -26,4 +26,4 @@ const pickNumber = ({players, gameId, currentMove, points}: IPickNumber) => {
     db.collection(collections.GAMES_LIST).doc(gameId).update(newData)
 }
 
-export default pickNumber
+export default guess
