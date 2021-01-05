@@ -17,7 +17,6 @@ const playerLeave = ({name, id, players}: IPlayerLeave) => {
         players: newPlayers
     })
         .catch((e) => {console.log(e)})
-    return {}
 }
 
 export default playerLeave
