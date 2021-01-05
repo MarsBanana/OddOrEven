@@ -3,6 +3,7 @@ import * as Effects from "redux-saga/effects"
 import {CreateGameAction, actionTypes, QuitGameAction, PickNumberAction, GuessAction} from "./types"
 import api from "../api"
 import {addGamesList, saveCurrentGameId, updateGameState} from "./actions"
+import {f7} from "framework7-react"
 
 const call: any = Effects.call
 const {takeLatest, all, put, select, take} = Effects
@@ -25,6 +26,7 @@ function* createGame(action: CreateGameAction) {
     try {
         const id = yield api.createGame(action.payload)
         yield put(saveCurrentGameId(id))
+        yield call(f7.views.main.router.navigate, "/game/")
     } catch (e) {
         yield console.log(e)
     }

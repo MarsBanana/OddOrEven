@@ -25,7 +25,6 @@ const CreateGameForm: React.FC = () => {
             }
 
             dispatch(createGame(gameName, playersAmount))
-            f7.views.main.router.navigate("/game/")
         } catch {}
     }
 
