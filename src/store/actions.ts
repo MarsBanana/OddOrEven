@@ -1,8 +1,8 @@
 import {actionTypes,ActionTypes, Game, GameData} from "./types"
 
-export const saveName = (name: string): ActionTypes => ({
+export const saveName = (playerName: string): ActionTypes => ({
     type: actionTypes.SAVE_NAME,
-    payload: name
+    payload: playerName
 })
 
 export const createGame = (gameName: string, playersAmount: number): ActionTypes => ({

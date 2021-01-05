@@ -26,7 +26,7 @@ const GameScreen: React.FC = () => {
 
     const currentGame = useSelector<IState, GameData | null>((state) => state.currentGame)
     const currentGameId = useSelector<IState, string | undefined>((state) => state.currentGameId)
-    const name = useSelector<IState, string | null>((state) => state.name)
+    const playerName = useSelector<IState, string | null>((state) => state.playerName)
 
     useEffect(() => {
         if (currentGame && !isGameEntered) {
@@ -66,7 +66,9 @@ const GameScreen: React.FC = () => {
             <Block style={customBlockStyle as CSSProperties}>
                 {!currentGame?.isStarted && <GoBack />}
                 {!currentGame ? <Loader /> : <GameInfo currentGame={currentGame} />}
-                {currentGame && name && <Move currentGame={currentGame} name={name} />}
+                {currentGame && playerName && (
+                    <Move currentGame={currentGame} playerName={playerName} />
+                )}
                 {currentGame && <Winner />}
             </Block>
         </Page>

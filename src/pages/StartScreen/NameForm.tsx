@@ -14,10 +14,10 @@ const NameForm: React.FC = () => {
     const [name, setName] = useState<string>("")
     const dispatch = useDispatch()
 
-    const storedName = useSelector((state: IState) => state.name)
+    const playerName = useSelector((state: IState) => state.playerName)
 
     useEffect(() => {
-        if (storedName === null) {
+        if (playerName === null) {
             setIsNameFormOpen(true)
         }
     }, [])

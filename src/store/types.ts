@@ -22,7 +22,7 @@ export type TPhase = typeof phaseTypes.GUESS | typeof phaseTypes.PICK
 
 export type MoveData = {
     index: number
-    name: string
+    playerName: string
     phase: TPhase
     number?: number
 }
@@ -48,7 +48,7 @@ export type Game = {
 }
 
 export interface IState {
-    name: string | null
+    playerName: string | null
     gamesList: Array<Game>
     currentGameId?: string
     currentGame: GameData | null

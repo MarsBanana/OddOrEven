@@ -5,7 +5,7 @@ import {GameData, MoveData, phaseTypes, Player} from "../../store/types"
 
 const Phase: React.FC<{currentMove?: MoveData}> = ({currentMove}) => (
     <CenteredText
-        text={`${currentMove?.name} is ${
+        text={`${currentMove?.playerName} is ${
             currentMove?.phase === phaseTypes.GUESS ? "guessing" : "picking"
         }`}
     />

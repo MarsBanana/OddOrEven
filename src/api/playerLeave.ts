@@ -5,13 +5,13 @@ import {collections} from "./constants"
 const db = firebase.firestore()
 
 interface IPlayerLeave {
-    name: string
+    playerName: string
     id: string
     players: Array<Player>
 }
 
-const playerLeave = ({name, id, players}: IPlayerLeave) => {
-    const disconnectingPlayerIndex = players.findIndex((player) => player.name === name)
+const playerLeave = ({playerName, id, players}: IPlayerLeave) => {
+    const disconnectingPlayerIndex = players.findIndex((player) => player.name === playerName)
 
     const playersBeforeDisconnecting = players.slice(0, disconnectingPlayerIndex)
     

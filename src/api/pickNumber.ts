@@ -21,7 +21,7 @@ const pickNumber = ({number, players, gameId, currentMove, roundsLeft}: IPickNum
     const newData = {
         currentMove: {
             index: newIndex,
-            name: players[newIndex].name,
+            playerName: players[newIndex].name,
             phase: phaseTypes.GUESS,
             number
         },

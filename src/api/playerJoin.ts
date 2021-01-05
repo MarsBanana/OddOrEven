@@ -5,31 +5,31 @@ import {collections} from "./constants"
 const db = firebase.firestore()
 
 interface IPlayerJoin {
-    name: string
+    playerName: string
     id: string
     players: Array<Player>
     playersAmount: number
 }
 
-const createPlayer = (name:string) => ({
-    name,
+const createPlayer = (playerName:string) => ({
+    playerName,
     points: 0
 })
 
-const playerJoin = ({name, id, players, playersAmount}: IPlayerJoin) => {
+const playerJoin = ({playerName, id, players, playersAmount}: IPlayerJoin) => {
 
     const startGameData = {
-        players: [...players, createPlayer(name)],
+        players: [...players, createPlayer(playerName)],
         currentMove: {
             index: 0,
-            name: players[0].name,
+            playerName: players[0].name,
             phase: phaseTypes.PICK
         },
         isStarted: true
     }
 
     const continuePlayersWaiting = {
-        players: [...players, createPlayer(name)]
+        players: [...players, createPlayer(playerName)]
     }
 
     const data = players.length + 1 === playersAmount ? startGameData : continuePlayersWaiting

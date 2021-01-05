@@ -1,7 +1,7 @@
 import {IState, actionTypes, ActionTypes} from "./types"
 
 const initialState: IState = {
-    name: null,
+    playerName: null,
     gamesList: [],
     currentGame: null,
 }
@@ -11,7 +11,7 @@ const reducer = (state = initialState, action: ActionTypes): IState => {
         case actionTypes.SAVE_NAME:
             return {
                 ...state,
-                name: action.payload
+                playerName: action.payload
             }
         case actionTypes.ADD_GAMES_LIST:
             return {

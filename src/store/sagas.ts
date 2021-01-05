@@ -50,12 +50,12 @@ export function* watchUpdateGameChannel() {
 
 export function* enterGame() {
     try {
-        const name = yield select((state) => state.name)
+        const playerName = yield select((state) => state.playerName)
         const players = yield select((state) => state.currentGame.players)
         const currentGameId = yield select((state) => state.currentGameId)
         const playersAmount = yield select((state) => state.currentGame.playersAmount)
 
-        yield call(api.playerJoin,{name,currentGameId,players,playersAmount})
+        yield call(api.playerJoin,{playerName,currentGameId,players,playersAmount})
 
     } catch (e) {
         console.log(e)
@@ -65,10 +65,10 @@ export function* enterGame() {
 function* quitGame(action: QuitGameAction) {
     try {
         const currentGameId = yield select((state) => state.currentGameId)
-        const name = yield select((state) => state.name)
+        const playerName = yield select((state) => state.playerName)
         const players = yield select((state) => state.currentGame.players)
 
-        yield call(api.playerLeave, {name, currentGameId, players})
+        yield call(api.playerLeave, {playerName, currentGameId, players})
 
         yield call(action.payload)
 
