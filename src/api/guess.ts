@@ -40,7 +40,7 @@ const guess = ({players, gameId, currentMove, points, roundsLeft}: IGuess) => {
               currentMove: newMove,
               players,
           }
-    console.log(endGame,roundsLeft)
+          
     db.collection(collections.GAMES_LIST).doc(gameId).update(newData)
 }
 
