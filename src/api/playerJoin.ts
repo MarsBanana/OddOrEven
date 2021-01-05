@@ -17,7 +17,8 @@ const createPlayer = (name:string) => ({
 })
 
 const playerJoin = ({name, id, players, playersAmount}: IPlayerJoin) => {
-    const data = players.length + 1 === playersAmount ? {
+
+    const startGameData = {
         players: [...players, createPlayer(name)],
         currentMove: {
             index: 0,
@@ -25,9 +26,14 @@ const playerJoin = ({name, id, players, playersAmount}: IPlayerJoin) => {
             phase: phaseTypes.PICK
         },
         isStarted: true
-    } : {
+    }
+
+    const continuePlayersWaiting = {
         players: [...players, createPlayer(name)]
     }
+
+    const data = players.length + 1 === playersAmount ? startGameData : continuePlayersWaiting
+    
     db.collection(collections.GAMES_LIST).doc(id).update(data)
 }
 

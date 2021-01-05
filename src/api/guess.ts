@@ -30,17 +30,19 @@ const guess = ({players, gameId, currentMove, points, roundsLeft}: IGuess) => {
         phase: phaseTypes.PICK,
     }
 
-    const newData = endGame
-        ? {
-              currentMove: null,
-              players,
-              winner: players.find((player) => player.points === maxPoints),
-          }
-        : {
-              currentMove: newMove,
-              players,
-          }
-          
+    const endGameData = {
+        currentMove: null,
+        players,
+        winner: players.find((player) => player.points === maxPoints),
+    }
+
+    const continueGameData = {
+        currentMove: newMove,
+        players,
+    }
+
+    const newData = endGame ? endGameData : continueGameData
+
     db.collection(collections.GAMES_LIST).doc(gameId).update(newData)
 }
 
