@@ -9,14 +9,14 @@ const popupCustomStyle = {
     marginTop: "-120px",
 }
 
-const Move: React.FC<{data: GameData; name: string}> = ({data, name}) => {
+const Move: React.FC<{currentGame: GameData; name: string}> = ({currentGame, name}) => {
     return (
         <Popup
             closeByBackdropClick={false}
-            opened={data?.isStarted && data.currentMove?.name === name}
+            opened={currentGame?.isStarted && currentGame.currentMove?.name === name}
             style={popupCustomStyle}
         >
-            {data.currentMove?.phase === phaseTypes.GUESS ? <Guess /> : <Pick />}
+            {currentGame.currentMove?.phase === phaseTypes.GUESS ? <Guess /> : <Pick />}
         </Popup>
     )
 }
