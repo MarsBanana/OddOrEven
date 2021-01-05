@@ -50,7 +50,7 @@ export type Game = {
 export interface IState {
     name: string | null
     gamesList: Array<Game>
-    currentId?: string
+    currentGameId?: string
     currentGame: GameData | null
     disconnect?: string
 }
@@ -74,7 +74,7 @@ export interface AddGamesListAction {
     payload: Array<Game>
 }
 
-export interface SaveCurrentIdAction {
+export interface SaveCurrentGameIdAction {
     type: typeof actionTypes.SAVE_CURRENT_ID
     payload?: string
 }
@@ -108,7 +108,7 @@ export type ActionTypes =
     CreateGameAction |
     FetchGamesListAction |
     AddGamesListAction |
-    SaveCurrentIdAction |
+    SaveCurrentGameIdAction |
     UpdateGameStateAction |
     QuitGameAction |
     EnterGameAction |

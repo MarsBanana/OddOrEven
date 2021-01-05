@@ -21,7 +21,7 @@ const reducer = (state = initialState, action: ActionTypes): IState => {
         case actionTypes.SAVE_CURRENT_ID:
             return {
                 ...state,
-                currentId: action.payload
+                currentGameId: action.payload
             }
         case actionTypes.UPDATE_GAME_STATE:
             return {

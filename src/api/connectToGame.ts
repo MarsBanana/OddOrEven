@@ -5,12 +5,12 @@ import {collections} from "./constants"
 const db = firebase.firestore()
 
 interface IConnectToGame {
-    id: string,
+    currentGameId: string,
     update: (game: GameData) => void
 }
 
-const connectToGame = ({id, update}: IConnectToGame) => {
-    const disconnect = db.collection(collections.GAMES_LIST).doc(id)
+const connectToGame = ({currentGameId, update}: IConnectToGame) => {
+    const disconnect = db.collection(collections.GAMES_LIST).doc(currentGameId)
         .onSnapshot(
             (doc) => {
                 const data = doc.data()

@@ -5,9 +5,9 @@ import remoteConfig from "../remoteConfig"
 
 const db = firebase.firestore()
 
-const createGame = (params: CREATE_GAME_PARAMS) => {
+const createGame = (params: CREATE_GAME_PARAMS): Promise<string | void> => {
 
-    const id = remoteConfig
+    const idPromise = remoteConfig
         .fetchAndActivate()
         .then(() => remoteConfig.getNumber(configConstants.ROUNDS))
         .then((roundsLeft) =>
@@ -25,7 +25,7 @@ const createGame = (params: CREATE_GAME_PARAMS) => {
                 })
         )
 
-    return id
+    return idPromise
 }
 
 export default createGame

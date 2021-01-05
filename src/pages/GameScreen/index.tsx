@@ -24,27 +24,27 @@ const GameScreen: React.FC = () => {
 
     const [isGameEntered, setIsGameEntered] = useState<boolean>(false)
 
-    const data = useSelector<IState, GameData | null>((state) => state.currentGame)
-    const id = useSelector<IState, string | undefined>((state) => state.currentId)
+    const currentGame = useSelector<IState, GameData | null>((state) => state.currentGame)
+    const currentGameId = useSelector<IState, string | undefined>((state) => state.currentGameId)
     const name = useSelector<IState, string | null>((state) => state.name)
 
     useEffect(() => {
-        if (data && !isGameEntered) {
+        if (currentGame && !isGameEntered) {
             dispatch(enterGame())
             setIsGameEntered(true)
         }
-    }, [data])
+    }, [currentGame])
 
     const disconnect = useRef<() => void>()
 
     useEffect(() => {
-        if (id) {
+        if (currentGameId) {
             disconnect.current = api.connectToGame({
-                id,
+                currentGameId,
                 update: (game: GameData) => dispatch(updateGameState(game)),
             })
         }
-    }, [id])
+    }, [currentGameId])
 
     const quit = () => {
         disconnect.current && dispatch(quitGame(disconnect.current))
@@ -64,10 +64,10 @@ const GameScreen: React.FC = () => {
     return (
         <Page>
             <Block style={customBlockStyle as CSSProperties}>
-                {!data?.isStarted && <GoBack />}
-                {!data ? <Loader /> : <GameInfo data={data} />}
-                {data && name && <Move data={data} name={name} />}
-                {data && <Winner />}
+                {!currentGame?.isStarted && <GoBack />}
+                {!currentGame ? <Loader /> : <GameInfo data={currentGame} />}
+                {currentGame && name && <Move data={currentGame} name={name} />}
+                {currentGame && <Winner />}
             </Block>
         </Page>
     )
