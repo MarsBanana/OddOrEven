@@ -3,10 +3,12 @@ import React from "react"
 import GoBack from "../../components/GoBack"
 import CreateGameForm from "./CreateGameForm"
 
+const blockCustomStyle = {marginTop: "30vh"}
+
 const CreateScreen: React.FC = () => {
     return (
         <Page>
-            <Block style={{marginTop: "30vh"}}>
+            <Block style={blockCustomStyle}>
                 <GoBack center />
                 <CreateGameForm />
             </Block>
