@@ -18,14 +18,14 @@ const Winner: React.FC = () => {
         f7.views.main.router.back()
     }
 
+    const pointsPlurality = winner?.points !== 1 ? "s" : ""
+
     return (
         <Popup closeByBackdropClick={false} opened={!!winner && isOpen} style={popupCustomStyle}>
             <CenteredText title text={`Game over`} />
             <CenteredText
                 title
-                text={`${winner?.name} won with ${winner?.points} point${
-                    winner?.points !== 1 ? "s" : ""
-                }`}
+                text={`${winner?.name} won with ${winner?.points} point${pointsPlurality}`}
             />
             <CenteredText>
                 <Button onClick={handleClick}>Exit</Button>
