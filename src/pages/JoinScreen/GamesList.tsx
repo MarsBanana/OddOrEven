@@ -1,4 +1,4 @@
-import {List, ListItem, f7} from "framework7-react"
+import {List, ListItem} from "framework7-react"
 import React, {useEffect, useState} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import {saveCurrentGameId} from "../../store/actions"
@@ -15,7 +15,6 @@ const GamesList: React.FC = () => {
 
     const connectToGame = (id: string) => {
         dispatch(saveCurrentGameId(id))
-        f7.views.main.router.navigate("/game/")
     }
 
     return (

@@ -18,6 +18,7 @@ function* sagas() {
         takeLatest(actionTypes.QUIT_GAME, quitGame),
         takeLatest(actionTypes.PICK_NUMBER, onPick),
         takeLatest(actionTypes.GUESS, onGuess),
+        takeLatest(actionTypes.SAVE_CURRENT_ID, onCurrentGameIdSave),
         watchUpdateGameChannel(),
     ])
 }
@@ -110,6 +111,14 @@ function* onGuess(action: GuessAction) {
             roundsLeft: currentGame.roundsLeft
         })
 
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+function* onCurrentGameIdSave() {
+    try {
+        yield call(f7.views.main.router.navigate, "/game/")
     } catch (e) {
         console.log(e)
     }
