@@ -23,14 +23,20 @@ const PlayersList: React.FC<{players: Array<Player>}> = ({players}) => (
     </List>
 )
 
+const WaitingForPlayers: React.FC<{
+    playersAmountExpected: number
+    playersAmountCurrent: number
+}> = ({playersAmountExpected, playersAmountCurrent}) => (
+    <CenteredText text={`Wait for ${playersAmountExpected - playersAmountCurrent} more players`} />
+)
+
 const GameInfo: React.FC<{currentGame: GameData}> = ({currentGame}) => (
     <>
         <CenteredText title text={currentGame.gameName} />
         {!currentGame.isStarted ? (
-            <CenteredText
-                text={`Wait for ${
-                    currentGame.playersAmount - currentGame.players.length
-                } more players`}
+            <WaitingForPlayers
+                playersAmountExpected={currentGame.playersAmount}
+                playersAmountCurrent={currentGame.players.length}
             />
         ) : (
             <>
