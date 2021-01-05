@@ -81,15 +81,15 @@ function* quitGame(action: QuitGameAction) {
 
 function* onPick(action: PickNumberAction) {
     try {
-        const data = yield select((state) => state.currentGame)
+        const currentGame = yield select((state) => state.currentGame)
         const currentGameId = yield select((state) => state.currentGameId)
 
         yield call(api.pickNumber,{
             number: action.payload,
-            players: data.players,
+            players: currentGame.players,
             currentGameId,
-            currentMove: data.currentMove,
-            roundsLeft: data.roundsLeft
+            currentMove: currentGame.currentMove,
+            roundsLeft: currentGame.roundsLeft
         })
 
     } catch (e) {
@@ -99,15 +99,15 @@ function* onPick(action: PickNumberAction) {
 
 function* onGuess(action: GuessAction) {
     try {
-        const data = yield select((state) => state.currentGame)
+        const currentGame = yield select((state) => state.currentGame)
         const currentGameId = yield select((state) => state.currentGameId)
 
         yield call(api.guess,{
-            players: data.players,
+            players: currentGame.players,
             currentGameId,
-            currentMove: data.currentMove,
+            currentMove: currentGame.currentMove,
             points: action.payload,
-            roundsLeft: data.roundsLeft
+            roundsLeft: currentGame.roundsLeft
         })
 
     } catch (e) {
