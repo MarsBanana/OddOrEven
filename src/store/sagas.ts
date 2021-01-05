@@ -1,4 +1,3 @@
-import {channel} from "redux-saga"
 import * as Effects from "redux-saga/effects"
 import {CreateGameAction, actionTypes, QuitGameAction, PickNumberAction, GuessAction} from "./types"
 import api from "../api"
@@ -6,9 +5,7 @@ import {addGamesList, saveCurrentGameId, updateGameState} from "./actions"
 import {f7} from "framework7-react"
 
 const call: any = Effects.call
-const {takeLatest, all, put, select, take} = Effects
-
-const updateGameChannel = channel()
+const {takeLatest, all, put, select} = Effects
 
 function* sagas() {
     yield all([
@@ -19,7 +16,6 @@ function* sagas() {
         takeLatest(actionTypes.PICK_NUMBER, onPick),
         takeLatest(actionTypes.GUESS, onGuess),
         takeLatest(actionTypes.SAVE_CURRENT_ID, onCurrentGameIdSave),
-        watchUpdateGameChannel(),
     ])
 }
 
@@ -41,13 +37,6 @@ function* fetchGamesList() {
         yield console.log(e)
     }
 }
-
-export function* watchUpdateGameChannel() {
-    while (true) {
-      const action = yield take(updateGameChannel)
-      yield put(action)
-    }
-  }
 
 export function* enterGame() {
     try {
