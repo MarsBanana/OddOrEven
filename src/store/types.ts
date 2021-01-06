@@ -4,13 +4,42 @@ export enum actionTypes {
     SAVE_NAME = "SAVE_NAME",
     CREATE_GAME = "CREATE_GAME",
     FETCH_GAMES_LIST = "FETCH_GAMES_LIST",
-    ADD_GAMES_LIST = "ADD_GAMES_LIST"
+    ADD_GAMES_LIST = "ADD_GAMES_LIST",
+    SAVE_CURRENT_ID = "SAVE_CURRENT_ID",
+    UPDATE_GAME_STATE = "UPDATE_GAME_STATE",
+    QUIT_GAME = "QUIT_GAME",
+    ENTER_GAME = "ENTER_GAME",
+    PICK_NUMBER = "PICK_NUMBER",
+    GUESS = "GUESS"
+}
+
+export enum phaseTypes {
+    GUESS = "GUESS",
+    PICK = "PICK"
+}
+
+export type TPhase = typeof phaseTypes.GUESS | typeof phaseTypes.PICK
+
+export type MoveData = {
+    index: number
+    playerName: string
+    phase: TPhase
+    number?: number
 }
 
 export type GameData = {
     gameName: string
     playersAmount: number
     isStarted: boolean
+    players: Array<Player>
+    roundsLeft: number
+    currentMove?: MoveData
+    winner?: Player
+}
+
+export type Player = {
+    name: string
+    points: number
 }
 
 export type Game = {
@@ -19,10 +48,11 @@ export type Game = {
 }
 
 export interface IState {
-    name: string | null
-    gameName: string | null
-    playersAmount: number | null
+    playerName: string | null
     gamesList: Array<Game>
+    currentGameId?: string
+    currentGame: GameData | null
+    disconnect?: string
 }
 
 export interface SaveNameAction {
@@ -39,9 +69,48 @@ export interface FetchGamesListAction {
     type: typeof actionTypes.FETCH_GAMES_LIST
 }
 
-export interface AddGamesList {
+export interface AddGamesListAction {
     type: typeof actionTypes.ADD_GAMES_LIST,
     payload: Array<Game>
 }
 
-export type ActionTypes = SaveNameAction | CreateGameAction | FetchGamesListAction | AddGamesList
+export interface SaveCurrentGameIdAction {
+    type: typeof actionTypes.SAVE_CURRENT_ID
+    payload?: string
+}
+
+export interface UpdateGameStateAction {
+    type: typeof actionTypes.UPDATE_GAME_STATE
+    payload: GameData | null
+}
+
+export interface QuitGameAction {
+    type: typeof actionTypes.QUIT_GAME
+    payload: () => void
+}
+
+export interface EnterGameAction {
+    type: typeof actionTypes.ENTER_GAME
+}
+
+export interface PickNumberAction {
+    type: typeof actionTypes.PICK_NUMBER
+    payload: number
+}
+
+export interface GuessAction {
+    type: typeof actionTypes.GUESS
+    payload: number
+}
+
+export type ActionTypes = 
+    SaveNameAction |
+    CreateGameAction |
+    FetchGamesListAction |
+    AddGamesListAction |
+    SaveCurrentGameIdAction |
+    UpdateGameStateAction |
+    QuitGameAction |
+    EnterGameAction |
+    PickNumberAction |
+    GuessAction

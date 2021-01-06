@@ -2,6 +2,7 @@ import {App, View} from "framework7-react"
 import React from "react"
 import StartScreen from "./pages/StartScreen"
 import CreateScreen from "./pages/CreateScreen"
+import GameScreen from "./pages/GameScreen"
 import JoinScreen from "./pages/JoinScreen"
 
 const f7params = {
@@ -19,6 +20,10 @@ const f7params = {
         {
             path: "/join/",
             component: JoinScreen,
+        },
+        {
+            path: "/game/",
+            component: GameScreen,
         },
     ],
 }
