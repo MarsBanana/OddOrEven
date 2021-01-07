@@ -23,7 +23,7 @@ function* createGame(action: CreateGameAction) {
     try {
         const id = yield api.createGame(action.payload)
         yield put(saveCurrentGameId(id))
-        yield call(f7.views.main.router.navigate, "/game/")
+        yield f7.views.main.router.navigate("/game/")
     } catch (e) {
         yield console.log(e)
     }
@@ -107,7 +107,7 @@ function* onGuess(action: GuessAction) {
 
 function* onCurrentGameIdSave() {
     try {
-        yield call(f7.views.main.router.navigate, "/game/")
+        yield f7.views.main.router.navigate("/game/")
     } catch (e) {
         console.log(e)
     }
