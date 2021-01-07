@@ -11,8 +11,8 @@ interface IPlayerJoin {
     playersAmount: number
 }
 
-const createPlayer = (playerName:string) => ({
-    playerName,
+const createPlayer = (name:string) => ({
+    name,
     points: 0
 })
 
