@@ -22,7 +22,6 @@ function* createGame(action: CreateGameAction) {
     try {
         const id = yield api.createGame(action.payload)
         yield put(saveCurrentGameId(id))
-        yield f7.views.main.router.navigate("/game/")
     } catch (e) {
         yield console.log(e)
     }
