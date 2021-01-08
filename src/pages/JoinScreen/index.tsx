@@ -1,9 +1,11 @@
 import {Block, Page} from "framework7-react"
 import GoBack from "../../components/GoBack"
-import React, {useEffect} from "react"
+import React, {useEffect, useRef} from "react"
 import {useDispatch} from "react-redux"
-import {fetchGamesList} from "../../store/actions"
 import GamesList from "./GamesList"
+import api from "../../api"
+import {updateGamesList} from "../../store/actions"
+import {Game} from "../../store/types"
 
 const customBlockStyle = {
     marginTop: "20vh",
@@ -12,8 +14,17 @@ const customBlockStyle = {
 const JoinScreen: React.FC = () => {
     const dispatch = useDispatch()
 
+    const disconnect = useRef<() => void>()
+
     useEffect(() => {
-        dispatch(fetchGamesList())
+        disconnect.current = api.connectToGamesList({
+            update: (gamesList: Array<Game>) => {
+                dispatch(updateGamesList(gamesList))
+            },
+        })
+        return () => {
+            disconnect.current && disconnect.current()
+        }
     }, [])
 
     return (

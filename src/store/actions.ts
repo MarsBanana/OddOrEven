@@ -13,13 +13,9 @@ export const createGame = (gameName: string, playersAmount: number): ActionTypes
     }
 })
 
-export const fetchGamesList = (): ActionTypes => ({
-    type: actionTypes.FETCH_GAMES_LIST
-})
-
-export const addGamesList = (games: Array<Game>): ActionTypes => ({
-    type: actionTypes.ADD_GAMES_LIST,
-    payload: games
+export const updateGamesList = (gamesList: Array<Game>): ActionTypes => ({
+    type: actionTypes.UPDATE_GAMES_LIST,
+    payload: gamesList
 })
 
 export const saveCurrentGameId = (id?: string): ActionTypes => ({
