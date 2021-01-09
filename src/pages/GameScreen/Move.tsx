@@ -16,7 +16,12 @@ const Move: React.FC<{currentGame: GameData; playerName: string}> = ({currentGam
             opened={currentGame?.isStarted && currentGame.currentMove?.playerName === playerName}
             style={popupCustomStyle}
         >
-            {currentGame.currentMove?.phase === phaseTypes.GUESS ? <Guess /> : <Pick />}
+            {currentGame.currentMove?.phase === phaseTypes.GUESS &&
+            currentGame.currentMove?.playerName === playerName ? (
+                <Guess />
+            ) : (
+                <Pick />
+            )}
         </Popup>
     )
 }
