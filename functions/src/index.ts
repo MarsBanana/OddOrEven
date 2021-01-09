@@ -1,6 +1,8 @@
 import * as functions from 'firebase-functions';
 import * as admin from "firebase-admin"
 
+admin.initializeApp()
+
 const db = admin.firestore()
 
 exports.deleteGameDoc = functions.firestore
@@ -14,6 +16,7 @@ exports.deleteGameDoc = functions.firestore
       if (playersAmount === 0) {
         db.collection("GAMES_LIST").doc(gameId)
           .delete()
+          .catch((e) => {console.log(e)})
       }
 
   })
