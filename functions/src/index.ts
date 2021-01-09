@@ -21,7 +21,7 @@ exports.deleteGameDoc = functions.firestore
           .then(() => {console.log("Deleted game doc with id = " + gameId)})
           .catch((e) => {console.log("Failed deleteGameDoc", e)})
       } else {
-        return console.log(gameId + " is still going")
+        return new Promise<() => void>(() => console.log(gameId + " is still going"))
       }
 
   })
