@@ -6,19 +6,19 @@ const db = firebase.firestore()
 
 interface IPlayerJoin {
     playerName: string
-    id: string
+    currentGameId: string
     players: Array<Player>
     playersAmount: number
 }
 
-const createPlayer = (playerName:string) => ({
-    playerName,
+const createPlayer = (name:string) => ({
+    name,
     points: 0
 })
 
-const playerJoin = ({playerName, id, players, playersAmount}: IPlayerJoin) => {
+const playerJoin = ({playerName, currentGameId, players, playersAmount}: IPlayerJoin) => {
 
-    const startGameData = {
+    const startGameData = (players: Array<Player>) => ({
         players: [...players, createPlayer(playerName)],
         currentMove: {
             index: 0,
@@ -26,15 +26,15 @@ const playerJoin = ({playerName, id, players, playersAmount}: IPlayerJoin) => {
             phase: phaseTypes.PICK
         },
         isStarted: true
-    }
+    })
 
     const continuePlayersWaiting = {
         players: [...players, createPlayer(playerName)]
     }
 
-    const data = players.length + 1 === playersAmount ? startGameData : continuePlayersWaiting
+    const data = players.length + 1 === playersAmount ? startGameData(players) : continuePlayersWaiting
     
-    db.collection(collections.GAMES_LIST).doc(id).update(data)
+    db.collection(collections.GAMES_LIST).doc(currentGameId).update(data)
 }
 
 export default playerJoin

@@ -1,8 +1,9 @@
 import * as Effects from "redux-saga/effects"
 import {CreateGameAction, actionTypes, QuitGameAction, PickNumberAction, GuessAction} from "./types"
 import api from "../api"
-import {addGamesList, saveCurrentGameId, updateGameState} from "./actions"
+import {saveCurrentGameId, updateGameState} from "./actions"
 import {f7} from "framework7-react"
+import routes from "../routes"
 
 const call: any = Effects.call
 const {takeLatest, all, put, select} = Effects
@@ -10,7 +11,6 @@ const {takeLatest, all, put, select} = Effects
 function* sagas() {
     yield all([
         takeLatest(actionTypes.CREATE_GAME, createGame),
-        takeLatest(actionTypes.FETCH_GAMES_LIST, fetchGamesList),
         takeLatest(actionTypes.ENTER_GAME, enterGame),
         takeLatest(actionTypes.QUIT_GAME, quitGame),
         takeLatest(actionTypes.PICK_NUMBER, onPick),
@@ -23,16 +23,6 @@ function* createGame(action: CreateGameAction) {
     try {
         const id = yield api.createGame(action.payload)
         yield put(saveCurrentGameId(id))
-        yield call(f7.views.main.router.navigate, "/game/")
-    } catch (e) {
-        yield console.log(e)
-    }
-}
-
-function* fetchGamesList() {
-    try {
-        const gamesList = yield call(api.fetchGamesList)
-        yield put(addGamesList(gamesList))
     } catch (e) {
         yield console.log(e)
     }
@@ -107,7 +97,7 @@ function* onGuess(action: GuessAction) {
 
 function* onCurrentGameIdSave() {
     try {
-        yield call(f7.views.main.router.navigate, "/game/")
+        yield f7.views.main.router.navigate(routes.game)
     } catch (e) {
         console.log(e)
     }

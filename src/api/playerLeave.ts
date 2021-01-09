@@ -6,11 +6,11 @@ const db = firebase.firestore()
 
 interface IPlayerLeave {
     playerName: string
-    id: string
+    currentGameId: string
     players: Array<Player>
 }
 
-const playerLeave = ({playerName, id, players}: IPlayerLeave) => {
+const playerLeave = ({playerName, currentGameId, players}: IPlayerLeave) => {
     const disconnectingPlayerIndex = players.findIndex((player) => player.name === playerName)
 
     const playersBeforeDisconnecting = players.slice(0, disconnectingPlayerIndex)
@@ -23,7 +23,7 @@ const playerLeave = ({playerName, id, players}: IPlayerLeave) => {
     ]
 
     db.collection(collections.GAMES_LIST)
-        .doc(id)
+        .doc(currentGameId)
         .update({
             players: newPlayers,
         })

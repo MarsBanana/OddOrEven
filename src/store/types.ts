@@ -4,7 +4,7 @@ export enum actionTypes {
     SAVE_NAME = "SAVE_NAME",
     CREATE_GAME = "CREATE_GAME",
     FETCH_GAMES_LIST = "FETCH_GAMES_LIST",
-    ADD_GAMES_LIST = "ADD_GAMES_LIST",
+    UPDATE_GAMES_LIST = "UPDATE_GAMES_LIST",
     SAVE_CURRENT_ID = "SAVE_CURRENT_ID",
     UPDATE_GAME_STATE = "UPDATE_GAME_STATE",
     QUIT_GAME = "QUIT_GAME",
@@ -65,12 +65,9 @@ export interface CreateGameAction {
     payload: CREATE_GAME_PARAMS
 }
 
-export interface FetchGamesListAction {
-    type: typeof actionTypes.FETCH_GAMES_LIST
-}
 
-export interface AddGamesListAction {
-    type: typeof actionTypes.ADD_GAMES_LIST,
+export interface UpdateGamesListAction {
+    type: typeof actionTypes.UPDATE_GAMES_LIST,
     payload: Array<Game>
 }
 
@@ -106,8 +103,7 @@ export interface GuessAction {
 export type ActionTypes = 
     SaveNameAction |
     CreateGameAction |
-    FetchGamesListAction |
-    AddGamesListAction |
+    UpdateGamesListAction |
     SaveCurrentGameIdAction |
     UpdateGameStateAction |
     QuitGameAction |

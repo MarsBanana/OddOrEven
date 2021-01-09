@@ -13,7 +13,7 @@ const reducer = (state = initialState, action: ActionTypes): IState => {
                 ...state,
                 playerName: action.payload
             }
-        case actionTypes.ADD_GAMES_LIST:
+        case actionTypes.UPDATE_GAMES_LIST:
             return {
                 ...state,
                 gamesList: action.payload

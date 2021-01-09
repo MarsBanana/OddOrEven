@@ -4,25 +4,26 @@ import StartScreen from "./pages/StartScreen"
 import CreateScreen from "./pages/CreateScreen"
 import GameScreen from "./pages/GameScreen"
 import JoinScreen from "./pages/JoinScreen"
+import routes from "./routes"
 
 const f7params = {
     name: "Odd or Even",
     id: "dater-test-game",
     routes: [
         {
-            path: "/",
+            path: routes.start,
             component: StartScreen,
         },
         {
-            path: "/create/",
+            path: routes.create,
             component: CreateScreen,
         },
         {
-            path: "/join/",
+            path: routes.join,
             component: JoinScreen,
         },
         {
-            path: "/game/",
+            path: routes.game,
             component: GameScreen,
         },
     ],
@@ -30,7 +31,7 @@ const f7params = {
 
 const AppComponent: React.FC = () => (
     <App params={f7params}>
-        <View main url="/" />
+        <View main url={routes.start} />
     </App>
 )
 
