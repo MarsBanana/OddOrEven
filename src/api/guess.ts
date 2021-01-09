@@ -6,13 +6,13 @@ const db = firebase.firestore()
 
 interface IGuess {
     players: Array<Player>
-    gameId: string
+    currentGameId: string
     currentMove: MoveData
     points: number
     roundsLeft: number
 }
 
-const guess = ({players, gameId, currentMove, points, roundsLeft}: IGuess) => {
+const guess = ({players, currentGameId, currentMove, points, roundsLeft}: IGuess) => {
     players[currentMove.index].points += points
 
     const pointsArr = players.map((player) => player.points)
@@ -43,7 +43,7 @@ const guess = ({players, gameId, currentMove, points, roundsLeft}: IGuess) => {
 
     const newData = endGame ? endGameData : continueGameData
 
-    db.collection(collections.GAMES_LIST).doc(gameId).update(newData)
+    db.collection(collections.GAMES_LIST).doc(currentGameId).update(newData)
 }
 
 export default guess

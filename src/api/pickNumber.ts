@@ -7,12 +7,12 @@ const db = firebase.firestore()
 interface IPickNumber {
     number: number
     players: Array<Player>
-    gameId: string
+    currentGameId: string
     currentMove: MoveData
     roundsLeft: number
 }
 
-const pickNumber = ({number, players, gameId, currentMove, roundsLeft}: IPickNumber) => {
+const pickNumber = ({number, players, currentGameId, currentMove, roundsLeft}: IPickNumber) => {
 
     const newIndex = currentMove.index + 1 === players.length ? 0 : currentMove.index + 1
 
@@ -28,7 +28,7 @@ const pickNumber = ({number, players, gameId, currentMove, roundsLeft}: IPickNum
         roundsLeft: newRoundsLeft > 0 ? newRoundsLeft : 1
     }
 
-    db.collection(collections.GAMES_LIST).doc(gameId).update(newData)
+    db.collection(collections.GAMES_LIST).doc(currentGameId).update(newData)
 }
 
 export default pickNumber
