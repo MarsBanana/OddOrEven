@@ -3,6 +3,7 @@ import {CreateGameAction, actionTypes, QuitGameAction, PickNumberAction, GuessAc
 import api from "../api"
 import {saveCurrentGameId, updateGameState} from "./actions"
 import {f7} from "framework7-react"
+import routes from "../routes"
 
 const call: any = Effects.call
 const {takeLatest, all, put, select} = Effects
@@ -96,7 +97,7 @@ function* onGuess(action: GuessAction) {
 
 function* onCurrentGameIdSave() {
     try {
-        yield f7.views.main.router.navigate("/game/")
+        yield f7.views.main.router.navigate(routes.game)
     } catch (e) {
         console.log(e)
     }
