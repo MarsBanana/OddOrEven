@@ -10,13 +10,18 @@ const popupCustomStyle = {
 }
 
 const Move: React.FC<{currentGame: GameData; playerName: string}> = ({currentGame, playerName}) => {
+    const isPopupOpen = currentGame?.isStarted && currentGame.currentMove?.playerName === playerName
+
+    const renderGuess =
+        currentGame.currentMove?.phase === phaseTypes.GUESS &&
+        currentGame.currentMove?.playerName === playerName
+
+    const renderPick = currentGame.currentMove?.phase === phaseTypes.PICK
+
     return (
-        <Popup
-            closeByBackdropClick={false}
-            opened={currentGame?.isStarted && currentGame.currentMove?.playerName === playerName}
-            style={popupCustomStyle}
-        >
-            {currentGame.currentMove?.phase === phaseTypes.GUESS ? <Guess /> : <Pick />}
+        <Popup closeByBackdropClick={false} opened={isPopupOpen} style={popupCustomStyle}>
+            {renderGuess && <Guess />}
+            {renderPick && <Pick />}
         </Popup>
     )
 }
