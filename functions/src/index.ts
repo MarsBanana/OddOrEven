@@ -1,9 +1,19 @@
 import * as functions from 'firebase-functions';
+import * as admin from "firebase-admin"
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+const db = admin.firestore()
+
+exports.deleteGameDoc = functions.firestore
+  .document('GAMES_LIST/{gameId}')
+  .onUpdate((change) => {
+      const gameData = change.after.data()
+      const gameId = change.after.id
+      
+      const playersAmount = gameData.players.length
+
+      if (playersAmount === 0) {
+        db.collection("GAMES_LIST").doc(gameId)
+          .delete()
+      }
+
+  })
