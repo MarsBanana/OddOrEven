@@ -1,5 +1,8 @@
 ## Игра чет-нечет
 
+Стек: TypeScript, React, Redux, Redux-saga, Framework7-react, Firebase
+Стилизация внутри tsx компонентов
+
 https://dater-test-game.web.app/
 
 После ввода имени можно создать или присоединиться к уже созданной комнате
